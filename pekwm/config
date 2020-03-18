@@ -1,0 +1,57 @@
+#INCLUDE = "$_PEKWM_ETC_PATH/config_system"
+
+Files {
+    Keys = "~/.config/pekwm/keys"
+    Mouse = "~/.config/pekwm/mouse"
+    Menu = "~/.config/pekwm/menu"
+    Start = "~/.config/pekwm/start"
+    AutoProps = "~/.config/pekwm/autoproperties"
+    Theme = "~/.config/pekwm/themes/minimalist"
+}
+
+MoveResize {
+    EdgeAttract = "0"
+    EdgeResist = "50"
+    WindowAttract = "0"
+    WindowResist = "0"
+    OpaqueMove = "True"
+    OpaqueResize = "False"
+}
+
+Screen {
+    Workspaces = "3"
+    WorkspacesPerRow = "1"
+    WorkspaceNames = "01;02;03"
+    ShowFrameList = "False"
+    ShowStatusWindow = "False"
+    ShowStatusWindowCenteredOnRoot = "False"
+    ShowClientID = "False"
+    ShowWorkspaceIndicator = "0"
+    PlaceNew = "True"
+    FocusNew = "True"
+
+    ReportAllClients = "False"
+
+    TrimTitle = "..."
+    FullscreenAbove = "True"
+    FullscreenDetect = "True"
+    HonourRandr = "True"
+    HonourAspectRatio = "True"
+    EdgeSize = "1 1 1 1"
+    EdgeIndent = "False"
+    PixmapCacheSize = "0"
+    DoubleClickTime = "250"
+
+    Placement {
+        Model = "MouseCentered"
+	WorkspacePlacements = "CenteredOnParent"
+	TransientOnParent = "True"
+    }
+}
+
+Menu {
+    DisplayIcons = "False"
+    Select = "Motion"
+    Enter = "Motion"
+    Exec = "ButtonRelease"
+}
