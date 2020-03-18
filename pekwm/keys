@@ -1,0 +1,86 @@
+INCLUDE = "vars"
+
+Global {
+# External Commands
+	KeyPress = "XF86Tools" { Actions = "Exec /usr/local/etc/cron.hourly/clock" }
+	#KeyPress = "XF86AudioMute" { Actions = "Exec /usr/local/etc/cron.daily/note" }
+	KeyPress = "XF86AudioLowerVolume" { Actions = "Exec /usr/local/bin/ninfo -yr" }
+	KeyPress = "XF86AudioRaiseVolume" { Actions = "Exec /usr/local/bin/ninfo -us" }
+	KeyPress = "XF86Mail" { Actions = "Exec /usr/local/etc/cron.d/checkmail" }
+	KeyPress = "Mod4 F12" { Actions = "Exec /usr/local/bin/nstats -all" }
+	KeyPress = "Print" { Actions = "Exec /usr/local/bin/dxcalib" }
+	KeyPress = "Mod4 Print" { Actions = "Exec /usr/local/bin/dcapture" }
+	KeyPress = "Mod4 Pause" { Actions = "Exec /usr/local/bin/dvoid" }
+	KeyPress = "Mod4 space" { Actions = "Exec /usr/local/bin/drun-hist" }
+
+#    KeyPress = "Mod4 Prior" { Actions = "Exec /usr/local/bin/drun-hist" }
+#    KeyPress = "Mod4 Next" { Actions = "Exec /usr/local/bin/drun-hist" }
+#    KeyPress = "Mod4 Home" { Actions = "Exec /usr/local/bin/drun-hist" }
+#    KeyPress = "Mod4 End" { Actions = "Exec /usr/local/bin/drun-hist" }
+#    KeyPress = "Mod4 Insert" { Actions = "Exec /usr/local/bin/drun-hist" }
+#    KeyPress = "Mod4 Delete" { Actions = "Exec /usr/local/bin/drun-hist" }
+
+#    KeyPress = "XF86Calculator" { Actions = "Exec /usr/local/bin/drun-hist" }
+
+	KeyPress = "Mod4 A" { Actions = "Exec /usr/local/bin/dclipmenu" }
+	KeyPress = "Mod4 B" { Actions = "Exec /usr/local/bin/palemoon" }
+	KeyPress = "Mod4 C" { Actions = "Exec ifrun galculator" }
+	KeyPress = "Mod4 E" { Actions = "Exec ifrun SciTE" }
+	KeyPress = "Mod4 F" { Actions = "Exec ifrun spacefm" }
+	KeyPress = "Mod4 L" { Actions = "Exec /usr/local/bin/dsearch" }
+	KeyPress = "Mod4 N" { Actions = "Exec /usr/local/bin/dnote" }
+	KeyPress = "Mod4 O" { Actions = "Exec ifrun osmo" }
+	KeyPress = "Mod4 P" { Actions = "Exec ifrun fpm2" }
+	KeyPress = "Mod4 T" { Actions = "Exec $TERM" }
+	KeyPress = "Mod4 W" { Actions = "Exec /usr/local/bin/dwww" }
+
+# Switch desktop
+	KeyPress = "Mod4 1" { Actions = "GotoWorkspace 1; Exec /usr/local/bin/deskid" }
+	KeyPress = "Mod4 2" { Actions = "GotoWorkspace 2; Exec /usr/local/bin/deskid" }
+	KeyPress = "Mod4 3" { Actions = "GotoWorkspace 3; Exec /usr/local/bin/deskid" }
+
+# Send window to desktop
+	KeyPress = "Mod4 Ctrl Right" { Actions = "SendToWorkspace PrevV; Exec /usr/local/bin/deskid; GoToWorkspace PrevV" }
+	KeyPress = "Mod4 Ctrl Left" { Actions = "SendToWorkspace NextV; Exec /usr/local/bin/deskid; GoToWorkspace NextV" }
+
+# Save and restore window position
+	KeyPress = "Scroll_Lock" { Actions = "Exec /usr/local/bin/wingp -s" }
+	KeyPress = "Mod4 Scroll_Lock" { Actions = "Exec /usr/local/bin/wingp -r" }
+
+# Window placement
+	KeyPress = "Mod4 Return" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,960,220,1920,1200" }
+	KeyPress = "Mod4 BackSpace" { Actions = "MoveToEdge Center" }
+
+# Change windows
+	KeyPress = "Mod4 Tab" { Actions = "Exec /usr/local/bin/dwinswitch" }
+	KeyPress = "Mod1 Tab" { Actions = "Exec /usr/bin/skippy-xd" }
+	KeyPress = "Mod4 Left" { Actions = "FocusDirectional Left" }
+	KeyPress = "Mod4 Right" { Actions = "FocusDirectional Right" }
+	KeyPress = "Mod4 Up" { Actions = "FocusDirectional Up" }
+	KeyPress = "Mod4 Down" { Actions = "FocusDirectional Down" }
+
+# Window management
+	KeyPress = "F12" { Actions = "Toggle FullScreen" }
+	KeyPress = "Mod4 H" { Actions = "Toggle Maximized True False" }
+	KeyPress = "Mod4 V" { Actions = "Toggle Maximized False True" }
+	KeyPress = "Mod4 I" { Actions = "Toggle Iconified" }
+	KeyPress = "Mod4 U" { Actions = "Toggle Sticky" }
+	KeyPress = "Mod4 Q" { Actions = "Close" }
+
+# Launch menus
+	KeyPress = "Mod4 Menu" { Actions = "ShowMenu Root" }
+	KeyPress = "Menu" { Actions = "ShowMenu Window" }
+	KeyPress = "Mod4 Z" { Actions = "HideAllMenus" }
+}
+
+Menu {
+# Keys in menus
+	KeyPress = "Down" { Actions = "NextItem" }
+	KeyPress = "Up" { Actions = "PrevItem" }
+	KeyPress = "Left" { Actions = "LeaveSubmenu" }
+	KeyPress = "Right" { Actions = "EnterSubmenu" }
+	KeyPress = "Return" { Actions = "Select" }
+	KeyPress = "space" { Actions = "Select" }
+	KeyPress = "Escape" { Actions = "Close" }
+	KeyPress = "Q" { Actions = "Close" }
+}
