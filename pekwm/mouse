@@ -1,0 +1,52 @@
+# Switch betwen click no raise or click to raise.
+#$CLIENT_CLICK = "Focus"
+$CLIENT_CLICK = "Focus; Raise"
+
+# Switch between sloppy and click to focus
+#INCLUDE = "$_PEKWM_ETC_PATH/mouse_sloppy"
+INCLUDE = "$_PEKWM_ETC_PATH/mouse_click"
+
+# Add configuration overrides here, it possible to add sections,
+# sub-section and values overriding/adding specific values.
+Root {
+	ButtonPress = "1" { Actions = "HideAllMenus" }
+	ButtonRelease = "2" { Actions = "Exec /usr/bin/skippy-xd" }
+	ButtonRelease = "3" { Actions = "HideAllMenus; ShowMenu Root" }
+	ButtonPress = "4" { Actions = "Exec /usr/local/bin/deskid; GoToWorkspace PrevV" }
+	ButtonPress = "5" { Actions = "Exec /usr/local/bin/deskid; GoToWorkspace NextV" }
+}
+
+Client {
+	ButtonPress = "1" { Actions = "HideAllMenus; $CLIENT_CLICK" }
+	ButtonRelease = "Mod4 1" { Actions = "UnFocus; Lower" }
+	ButtonRelease = "Mod4 2" { Actions = "Exec /usr/bin/skippy-xd" }
+	ButtonPress = "3" { Actions = "HideAllMenus" }
+	ButtonRelease = "Mod4 3" { Actions = "HideAllMenus; ShowMenu Window" }
+	ButtonPress = "Mod4 4" { Actions = "SendToWorkspace PrevV; Exec /usr/local/bin/deskid; GotoWorkspace PrevV" }
+	ButtonPress = "Mod4 5" { Actions = "SendToWorkspace NextV; Exec /usr/local/bin/deskid; GotoWorkspace NextV" }
+	Motion = "Mod4 1" { Actions = "Move"; Threshold = "5" }
+	Motion = "Mod4 3" { Actions = "Resize" }
+	Enter = "Any Any" { Actions = "Focus" }
+}
+
+Menu {
+	ButtonRelease = "3" { Actions = "Close" }
+	Motion = "Mod4 1" { Actions = "Focus; Raise; Move"; Threshold = "5" }
+	Enter = "Any Any" { Actions = "Focus" }
+}
+
+ScreenEdge {
+	Left {
+		EnterMoving = "Any Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,2,2,1916,2156" }
+	}
+	Right {
+		EnterMoving = "Any Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,1924,2,1916,2156" }
+	}
+}
+
+Other {
+	ButtonRelease = "Mod4 3" { Actions = "Close" }
+	Motion = "1" { Actions = "Focus; Raise; Move" }
+	Motion = "Mod4 1" { Actions = "Focus; Raise; Move"; Threshold = "5" }
+	Enter = "Any Any" { Actions = "Focus" }
+}
