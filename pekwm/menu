@@ -7,12 +7,11 @@ RootMenu = "Pekwm" {
 	Entry = "Spacefm" { Actions = "Exec ifrun spacefm" }
 	Entry = "Pale Moon" { Actions = "Exec /usr/local/bin/palemoon" }
 	Separator {}
-
 	Submenu = "Audio" {
 		Entry = "Sweep" { Actions = "Exec ifrun sweep" }
 		Entry = "Reaper" { Actions = "Exec ifrun reaper" }
 		Separator {}
-		Entry = "Alsamixer" { Actions = "Exec /usr/local/bin/st-tab alsamixer" }
+		Entry = "Alsamixer" { Actions = "Exec tabbed alsamixer" }
 	}
 	Submenu = "Devel" {
 		Entry = "Gimp" { Actions = "Exec ifrun gimp" }
@@ -27,15 +26,18 @@ RootMenu = "Pekwm" {
 		Separator {}
 		Entry = "Fontview" { Actions = "Exec ifrun gtk2fontsel" }
 		Entry = "Colorview" { Actions = "Exec ifrun gcolor2" }
+		Separator {}
+		Entry = "Terminal" { Actions = "Exec tabbed" }
+		Entry = "Top" { Actions = "Exec tabbed top" }
+		
 	}
 	Separator {}
-
 	Submenu = "Settings" {
 		Submenu = "Themes" {
 			Entry = "Gtk theme" { Actions = "Exec ifrun lxappearance" }
 			Separator {}
-			Entry { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_themeset.sh $_PEKWM_THEME_PATH" }
-			Entry { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_themeset.sh ~/.config/pekwm/themes" }
+			Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_themeset.sh $_PEKWM_THEME_PATH" }
+			Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_themeset.sh ~/.config/pekwm/themes" }
 		}
 		Submenu = "Pekwm" {
 			Entry = "Reload" { Actions = "Reload" }
@@ -46,16 +48,6 @@ RootMenu = "Pekwm" {
 }
 
 WindowMenu = "Window Menu" {
-	Entry = "(Un)Stick" { Actions = "Toggle Sticky" }
-	Entry = "Iconify" { Actions = "Set Iconified" }
-	Separator {}
-	Entry = "Toggle Horizontal" { Actions = "Toggle Maximized True False" }
-	Entry = "Toggle Vertical" { Actions = "Toggle Maximized False True" }
-	Entry = "Toggle Full" { Actions = "Toggle Maximized True True" }
-	Separator {}
-	Entry = "Toggle Always On Top" { Actions = "Toggle AlwaysOnTop" }
-	Entry = "Toggle Always Below" { Actions = "Toggle AlwaysBelow" }
-	
 	SubMenu = "Send To" {
 		# Create sendto menu once per pekwm config reload. The fast way that
 		# will work for most if not all users.
@@ -66,8 +58,17 @@ WindowMenu = "Window Menu" {
 		# ~/.pekwm/config. You will know if you want this.
 		# Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_ws_menu.sh send dynamic" }
 	}
+	Entry = "(Un)Stick" { Actions = "Toggle Sticky" }
+	Entry = "Iconify" { Actions = "Exec /usr/local/bin/dowin" }
+	#Entry = "Iconify" { Actions = "Set Iconified" }
 	Separator {}
-
-	Entry = "Close" { Actions = "Close" }
+	Entry = "Toggle Always On Top" { Actions = "Toggle AlwaysOnTop" }
+	Entry = "Toggle Always Below" { Actions = "Toggle AlwaysBelow" }
+	Separator {}
+	Entry = "Toggle Horizontal" { Actions = "Toggle Maximized True False" }
+	Entry = "Toggle Vertical" { Actions = "Toggle Maximized False True" }
+	Entry = "Toggle Full" { Actions = "Toggle Maximized True True" }
+	Separator {}
 	Submenu = "Kill" { Entry = "Kill application" { Actions = "Kill" } }
+	Entry = "Close" { Actions = "Close" }
 }

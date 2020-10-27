@@ -1,0 +1,23 @@
+# Ignore errors
+-i
+# Downloads directory
+-o '/media/store/Downloads/%(title)s-%(id)s.%(ext)s'
+
+# Use aria2c
+--external-downloader aria2c
+--external-downloader-args "-c -j 3 -x 3 -s 3 -k 1M"
+
+# Defaults
+--no-call-home
+--geo-bypass
+
+# Uniform Format
+#--prefer-ffmpeg
+#--merge-output-format mkv
+
+#--extract-audio
+#--audio-format opus
+
+# Best format
+#-f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+#-f 'bestvideo[ext=webm]+bestaudio[ext=m4a]/best[ext=mp4]/best'

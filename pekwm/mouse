@@ -1,13 +1,6 @@
-# Switch betwen click no raise or click to raise.
-#$CLIENT_CLICK = "Focus"
-$CLIENT_CLICK = "Focus; Raise"
-
-# Switch between sloppy and click to focus
-#INCLUDE = "$_PEKWM_ETC_PATH/mouse_sloppy"
-INCLUDE = "$_PEKWM_ETC_PATH/mouse_click"
-
 # Add configuration overrides here, it possible to add sections,
 # sub-section and values overriding/adding specific values.
+
 Root {
 	ButtonPress = "1" { Actions = "HideAllMenus" }
 	ButtonRelease = "2" { Actions = "Exec /usr/bin/skippy-xd" }
@@ -17,36 +10,44 @@ Root {
 }
 
 Client {
-	ButtonPress = "1" { Actions = "HideAllMenus; $CLIENT_CLICK" }
-	ButtonRelease = "Mod4 1" { Actions = "UnFocus; Lower" }
-	ButtonRelease = "Mod4 2" { Actions = "Exec /usr/bin/skippy-xd" }
+	# Enable sloppy pointer focus
+	#Enter = "Any Any" { Actions = "Focus" }
+	ButtonPress = "1" { Actions = "HideAllMenus; Focus; Raise" }
 	ButtonPress = "3" { Actions = "HideAllMenus" }
+	ButtonPress = "4" { Actions = "Raise" }
+	ButtonPress = "5" { Actions = "Raise" }
+
+	ButtonRelease = "Mod4 1" { Actions = "Lower; UnFocus" }
+	ButtonRelease = "Mod4 2" { Actions = "Exec /usr/local/bin/skippy" }
 	ButtonRelease = "Mod4 3" { Actions = "HideAllMenus; ShowMenu Window" }
-	ButtonPress = "Mod4 4" { Actions = "SendToWorkspace PrevV; Exec /usr/local/bin/deskid; GotoWorkspace PrevV" }
-	ButtonPress = "Mod4 5" { Actions = "SendToWorkspace NextV; Exec /usr/local/bin/deskid; GotoWorkspace NextV" }
-	Motion = "Mod4 1" { Actions = "Move"; Threshold = "5" }
-	Motion = "Mod4 3" { Actions = "Resize" }
-	Enter = "Any Any" { Actions = "Focus" }
+	ButtonPress = "Mod4 4" { 
+		Actions = "SendToWorkspace PrevV; Exec /usr/local/bin/deskid; GotoWorkspace PrevV; Focus; Raise" }
+	ButtonPress = "Mod4 5" { 
+		Actions = "SendToWorkspace NextV; Exec /usr/local/bin/deskid; GotoWorkspace NextV; Focus; Raise" }
+
+	Motion = "Mod4 1" { Threshold = "5"; Actions = "Move" }
+	Motion = "Mod4 3" { Threshold = "5"; Actions = "Resize" }
 }
 
 Menu {
-	ButtonRelease = "3" { Actions = "Close" }
-	Motion = "Mod4 1" { Actions = "Focus; Raise; Move"; Threshold = "5" }
 	Enter = "Any Any" { Actions = "Focus" }
+	ButtonRelease = "3" { Actions = "Close" }
 }
 
 ScreenEdge {
 	Left {
-		EnterMoving = "Any Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,2,2,1916,2156" }
+		EnterMoving = "Any Any" {
+			Threshold = "10"; Actions = "Exec wmctrl -r :ACTIVE: -e 0,10,10,1905,2140" }
 	}
 	Right {
-		EnterMoving = "Any Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,1924,2,1916,2156" }
+		EnterMoving = "Any Any" {
+			Threshold = "10"; Actions = "Exec wmctrl -r :ACTIVE: -e 0,1925,10,1905,2140" }
 	}
 }
 
-Other {
-	ButtonRelease = "Mod4 3" { Actions = "Close" }
-	Motion = "1" { Actions = "Focus; Raise; Move" }
-	Motion = "Mod4 1" { Actions = "Focus; Raise; Move"; Threshold = "5" }
-	Enter = "Any Any" { Actions = "Focus" }
-}
+#Other {
+#	Enter = "Any Any" { Actions = "Focus" }
+#	ButtonRelease = "Mod4 3" { Actions = "Close" }
+#	Motion = "1" { Actions = "Focus; Raise" }
+#	Motion = "Mod4 1" { Threshold = "5"; Actions = "Focus; Raise; Move" }
+#}

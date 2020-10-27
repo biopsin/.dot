@@ -10,8 +10,8 @@ Files {
 }
 
 MoveResize {
-    EdgeAttract = "0"
-    EdgeResist = "50"
+    EdgeAttract = "25"
+    EdgeResist = "100"
     WindowAttract = "0"
     WindowResist = "0"
     OpaqueMove = "True"
@@ -19,9 +19,9 @@ MoveResize {
 }
 
 Screen {
-    Workspaces = "3"
+    Workspaces = "2"
     WorkspacesPerRow = "1"
-    WorkspaceNames = "01;02;03"
+    WorkspaceNames = "01;02"
     ShowFrameList = "False"
     ShowStatusWindow = "False"
     ShowStatusWindowCenteredOnRoot = "False"
@@ -29,23 +29,23 @@ Screen {
     ShowWorkspaceIndicator = "0"
     PlaceNew = "True"
     FocusNew = "True"
+	FocusStealProtect = "1"
 
     ReportAllClients = "False"
 
-    TrimTitle = "..."
+    TrimTitle = ""
     FullscreenAbove = "True"
     FullscreenDetect = "True"
-    HonourRandr = "True"
-    HonourAspectRatio = "True"
-    EdgeSize = "1 1 1 1"
-    EdgeIndent = "False"
+    HonourRandr = "False"
+    HonourAspectRatio = "False"
+    EdgeSize = "10 10 10 10"
+    EdgeIndent = "True"
     PixmapCacheSize = "0"
     DoubleClickTime = "250"
 
     Placement {
         Model = "MouseCentered"
-	WorkspacePlacements = "CenteredOnParent"
-	TransientOnParent = "True"
+        TransientOnParent = "True"
     }
 }
 

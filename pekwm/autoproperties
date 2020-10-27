@@ -2,28 +2,23 @@ Require {
 	Templates = "True"
 }
 
-// Start of autoproperties. -------------------------
+// Start of autoproperties
+
+Property = "(st|256color),(st|256color)" {
+	Title = "(\/usr\/bin\/sudo|\/bin\/bash)"
+ 	ApplyOn = "New"
+	ClientGeometry = "286x54+10-10"
+}
 
 Property = "tabbed,tabbed" {
+	Title = "."
  	ApplyOn = "New"
-	ClientGeometry = "+10+10"
-}
-
-Property = "st-256color,st-256color" {
-	Title = "/usr/bin/sudo"
- 	ApplyOn = "New"
-	ClientGeometry = "256x40+10-10"
-}
-
-Property = "st-256color,st-256color" {
-	Title = "/bin/bash"
- 	ApplyOn = "New"
-	ClientGeometry = "256x40+10-10"
+	ClientGeometry = "+10-10"
 }
 
 Property = "spacefm,Spacefm,file_manager" {
  	ApplyOn = "New"
-	ClientGeometry = "800x860+10+680"
+	ClientGeometry = "948x1065+10-10"
 }
 
 Property = "spacefm,Spacefm" {
@@ -37,14 +32,9 @@ Property = "abiword,Abiword,topLevelWindow" {
 	ClientGeometry = "1334x1785+1252+186"
 }
 
-Property = "epdfview,"Epdfview" {
+Property = "epdfview,Epdfview" {
  	ApplyOn = "New"
-	ClientGeometry = "1260x1680"
-}
-
-Property = "galculator,Galculator" {
- 	ApplyOn = "New"
-	ClientGeometry = "640x640+1600+10"
+	ClientGeometry = "1270x1800"
 }
 
 Property = "osmo,Osmo" {
@@ -70,10 +60,10 @@ Property = "Global,Pale moon,console" {
 
 Property = "Navigator,Pale moon,view-source" {
  	ApplyOn = "New"
-	ClientGeometry = "+810+150"
+	ClientGeometry = "1280x1670+1280+150"
 }
 
-// End of autoproperties. -------------------------
+// End of autoproperties
 
 TypeRules {
 	INCLUDE = "$_PEKWM_ETC_PATH/autoproperties_typerules"

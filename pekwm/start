@@ -8,13 +8,15 @@
 # .xinitrc you'll run all commands, then launch the window manager last.
 #
 # It also gets re-run every time pekwm is restarted.
-#export DESKTOP_ENV=PEKWM
-#export DE=generic
+
+# Set desktop env
+#DESKTOP_ENV=PEKWM
+#DE=generic
 
 # Fix GTK+ paths
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+#GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 # GTK3+ fix
-#export GDK_CORE_DEVICE_EVENTS=1
+#GDK_CORE_DEVICE_EVENTS=1
 
 # Enable qt5 to gtk2 theme by installing 
 # qt5-styleplugins and setting the following 
@@ -24,10 +26,6 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 #export QT_PLATFORM_PLUGIN=gtk2
 #export QT_QPA_PLATFORMTHEME=gtk2
 #export QT_AUTO_SCREEN_SCALE_FACTOR=0
-
-# Enable GL-accel in palemoon
-export MOZ_USE_OMTC=1
-export MOZ_PLUGIN_PATH="$HOME/.mozilla/plugins"
 
 # Disables jackdbus and runs plain jackd
 #export JACK_NO_AUDIO_RESERVATION=TRUE
