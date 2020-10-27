@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+wgf=/tmp/win.geo
+# Windows geometry save/restore
+case $1 in
+    -s)
+		# Same all windows
+		wmctrl -SlG | tee > $wgf
+		notify-send -a info "Geometry    saved" -u normal -t 5000
+		;;
+    -r)
+		# Restore all windows
+		while read -a arr; do
+			wmctrl -ia ${arr[0]} -e ${arr[1]},${arr[2]},${arr[3]},${arr[4]},${arr[5]}
+		done < $wgf
+		;;
+    * )
+		printf "Usage: wingp [option]\n\
+	'-s' save windows geometry and position\n\
+	'-r' restore geometry and position" ;;
+esac

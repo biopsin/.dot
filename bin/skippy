@@ -1,0 +1,4 @@
+#!/bin/sh
+# Check prelim skippy-xd
+pidof -s skippy-xd && exit 0
+/usr/bin/skippy-xd > /dev/null 2>&1

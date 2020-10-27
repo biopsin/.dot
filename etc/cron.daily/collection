@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Check update packages
+dunstify -a info -r 1169 "xbps" "\n$(xbps-install -nuM | wc -l) - New package(s)" -t 60000 -u normal
+
+# Daily forunes
+dunstify -r 6718 "Daily Fortune" "\n$(/usr/bin/fortune)" -t 60000 -u low
+
+# Clean bash history
+/usr/local/bin/histcleanup > /tmp/hist.clean
+mv -f /tmp/hist.clean /home/userx/.bash_history
+dunstify "Bash" "\nHistory	cleaned" -t 30000 -u low

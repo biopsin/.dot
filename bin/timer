@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+# Simple timer
+counter=0
+limit=$1
+
+snore()
+{
+	local IFS
+	[[ -n "${_snore_fd:-}" ]] || exec {_snore_fd}<> <(:)
+	read ${1:+-t "$1"} -u $_snore_fd || :
+}
+
+notify-send -r 2018 "Timer  started" "\n$(date +%H:%M)\nSet for $limit minute(s)" -u normal
+
+while snore 60; do
+	[ $counter != $limit ] && let "counter = $counter + 1"; retm="$(echo $limit - $counter | bc)"
+	[ $retm -ne 1 ] && notify-send -r 2018 "Timer  remain" "\n$retm minutes" -u low > /dev/null
+	[ $retm -eq 1 ] && notify-send -r 2018 "Timer  remain" "\n$retm minute" -u normal > /dev/null
+	[ $counter = $limit ] && notify-send -r 2018 "Timer  ended" "\n$(date +%H:%M)\nTimes up !!!" -u critical && exit 0
+done

@@ -1,0 +1,92 @@
+#!/usr/bin/bash
+
+# Notify
+notify-send "Clipmenud	Enabled" -t 10000 &
+
+cache_dir=$HOME/.cache/clipmenu
+cache_file=$cache_dir/line_cache
+# lock_file is the lock for *one* iteration of clipboard capture/propagation.
+# session_lock_file is the lock to prevent running multiple clipmenud daemons.
+lock_file=$cache_dir/lock
+session_lock_file=$cache_dir/session_lock
+lock_timeout=2
+
+_xsel() {
+    timeout 1 xsel --logfile /dev/null "$@"
+}
+
+get_first_line() {
+    # Args:
+    # - $1, the file or data
+    # - $2, optional, the line length limit
+
+    data=${1?}
+    line_length_limit=${2-300}
+
+    awk -v limit="$line_length_limit" '
+        BEGIN { printed = 0; }
+
+        printed == 0 && NF {
+            $0 = substr($0, 0, limit);
+            printf("%s", $0);
+            printed = 1;
+        }
+
+        END {
+            if (NR > 1) {
+                print " (" NR " lines)";
+            } else {
+                printf("\n");
+            }
+        }' <<< "$data"
+}
+
+mkdir -p -m0700 "$cache_dir"
+
+exec {session_lock_fd}> "$session_lock_file"
+
+if ! flock -x -n "$session_lock_fd"; then
+    printf 'ERROR: %s\n' "Can't lock session file, is another clipmenud running?"
+    exit 2
+fi
+
+declare -A last_data
+declare -A last_filename
+
+exec {lock_fd}> "$lock_file"
+
+while clipnotify -s clipboard; do
+
+    if ! flock -x -w "$lock_timeout" "$lock_fd"; then
+        printf 'ERROR: %s\n' 'Timed out waiting for lock' >&2
+        exit 1
+    fi
+
+    for selection in clipboard; do
+        data=$(_xsel -o --"$selection"; printf x)
+
+        data=${data%x}
+
+        if [[ $data != *[^[:space:]]* ]]; then
+            continue
+        fi
+
+        if [[ ${last_data[$selection]} == "$data" ]]; then
+            continue
+        fi
+
+        first_line=$(get_first_line "$data")
+
+        filename="$cache_dir/$(cksum <<< "$first_line")"
+
+        last_data[$selection]=$data
+        last_filename[$selection]=$filename
+
+        printf '%s' "$data" > "$filename"
+        printf '%s\n' "$first_line" >> "$cache_file"
+
+    done
+
+    flock -u "$lock_fd"
+
+done

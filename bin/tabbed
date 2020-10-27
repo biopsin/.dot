@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+# start tabbed or switch to or append to
+runtab() {
+    /usr/bin/tabbed -cd -r 2 -g 950x1060  st -w '' >$xidfile 2>/dev/null &
+	exit
+}
+
+xidfile=/tmp/tab.xid
+[[ ! -e "$xidfile" ]] && runtab
+[[ -z $(pidof -s tabbed) ]] && rm $xidfile && runtab
+
+xid=$(cat $xidfile)
+wmctrl -ia "$xid"
+[[ -z "$1" ]] && exit || st -w "$xid" -e "$1" &

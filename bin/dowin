@@ -1,0 +1,35 @@
+#!/bin/bash
+
+dws() {
+	# filter wmctrl output; work on win id
+	win="$(wmctrl -Sul |  sed -e 's/  /    -    /; s/voidx/   -   /' | tac | dmenu "$1")"
+	# recall selected win id
+	[[ $win ]] && dunstify -C $win && wmctrl -ia $win
+}
+
+cid() {
+	# set cache folder
+	diw=/tmp/diw
+	[ -d "$diw" ] || mkdir  -p "$diw"
+
+	# get window id
+	wid="$(wmctrl -a :ACTIVE: -v 2>&1)"
+	eid="$(echo ${wid:27})"
+
+	# check if already docked and only do minimize
+	[[ -n $(ps -fC dunstify | grep -o $eid | head -1) ]] && wmctrl -iY $eid && exit 0
+
+	# Enable only if sloppy mouse focus is used, to raise a focused window while scrot
+	#wmctrl -ia $eid &&
+
+	# capture, minimize and dock; then restore on action
+	scrot -u $diw/$eid.png -t 128x128 -o && wmctrl -iY $eid && \
+	[[ $(dunstify -a dock -r $eid -A Y," Docked - $eid" -I "$diw/$eid-thumb.png" "•") = Y ]] && \
+	wmctrl -ia $eid && exit 0
+}
+
+case $1 in
+	-zap) rm /tmp/diw/0x* ;;
+	-ws) dws ;;
+    *)	cid ;;
+esac

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# echo -n option prints text without new line
+echo -n "[ "
+for arg in "$@"; do
+    echo -n "{$arg} "
+done
+echo "]"

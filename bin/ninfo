@@ -1,0 +1,36 @@
+#!/usr/bin/bash
+# Get daily temperture from yr.no
+yr() {
+	yrl="https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/"
+	gurl=$(curl -s $yrl | grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
+	printf "$gurl"
+}
+
+nyr() {
+	dunstify "Weather" "\n<a href=\"https://www.yr.no/en/forecast/daily-table/2-11693977/Norway/Oslo/Oslo/Hauketo\"></a>$(yr)" -t 60000 -u low
+}
+
+# Tomorrows plan on underskog.no
+us() {
+	udt=$(date --date='tomorrow' +'%Y/%m/%d')
+	usu="https://underskog.no/kalender/liste/$udt"
+	usg=$(curl -s $usu | html2text | awk -F'[][]' '{print $2}' | awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
+	printf "$usg"
+}
+
+nus() {
+	dunstify "Underskog" "\n<a href=\"https://underskog.no/kalender\"></a>$(us)" -t 60000 -u low
+}
+
+# Currency exchange NOK 1.0
+cur() {
+	dunstify "Currency NOK" "\n$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | grep -Eo "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*")" -t 60000 -u low
+}
+
+case $1 in
+    -yr) $(nyr) ;;
+    -cur) $(cur) ;;
+    -us)	$(nus) ;;
+    -all)	$(nyr) && $(cur) && $(nus) ;;
+    *)	printf "Show info as notification\n  -all : Show all notifications\n  -yr : Show weather yr.no\n  -cur : Show daily currency\n  -us : Show news underskog.no"  ;;
+esac

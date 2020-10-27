@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+## List installed obsolete packages
+PACKAGELIST=$( xbps-query -l | sed 's/^[[:lower:]]*[[:space:]]\([^[:space:]]*\)-[[:alnum:]_.+~:]*[[:space:]].*$/\1/' )
+REMOTELIST=$( xbps-query -Rs \* | sed 's/^\[.\][[:space:]]\([^[:space:]]*\)-[[:alnum:]_.+~:]*[[:space:]].*$/\1/' )
+
+for PACKAGE in $PACKAGELIST; do
+    echo "$REMOTELIST" | grep -q "^${PACKAGE}$"
+    if test $? -ne 0; then
+        echo "$PACKAGE"
+    fi
+done

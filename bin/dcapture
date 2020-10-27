@@ -1,0 +1,23 @@
+#!/bin/sh
+
+choice=$(printf "1  :  Screenshot desktop\n2  :  Screenshot window\n3  :  Screenshot select\n4  :  Record desktop\n5  :  Record window\n6  :  Record audio" | dmenu | cut -d ' ' -f 1)
+
+case "$choice" in
+    1) scrot $HOME/Downloads/'%y-%m-%d--%s_scrot.png' -e 'viewnior $f' ;;
+    2) scrot -u $HOME/Downloads/'%y-%m-%d--%s_$wx$h_scrot.png' -e 'viewnior $f' ;;
+    3) scrot -s $HOME/Downloads/'%y-%m-%d--%s_scrot.png' -e 'viewnior $f' ;;
+
+    4) st -e ffmpeg -video_size 3840x2160 -framerate 30 -f x11grab -i :0.0+0,0 \
+            -f alsa -acodec pcm_s24le -i loopout \
+            /media/store/Media/record_$(date +%F_%R).mkv ;;
+
+    5)
+        ws=$(xwininfo -id $(xwininfo | awk '/Window id:/ {print $4}') | awk '/Width/{w=$2;} /Height/{h=$2;} END{ print w"x"h }')
+        wp=$(xwininfo -id $(xwininfo | awk '/Window id:/ {print $4}') | awk '/Absolute.*X/{x=$NF;}; /Absolute.*Y/{y=$NF;} END{ print ":0.0+"x","y; }')
+        st -e ffmpeg -video_size "$ws" -framerate 30 -f x11grab -i "$wp" \
+			-f alsa -ac 2 -i loopout -acodec pcm_s24le \
+            /media/store/Media/record_$(date +%F_%R).mkv ;;
+
+    6) st -e ffmpeg -f alsa -ac 2 -i loopout -acodec pcm_s24le \
+		/media/store/Media/record_$(date +%F_%R).wav ;;
+esac

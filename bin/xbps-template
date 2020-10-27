@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+# xtemplate pkg... - show template of a package
+
+for p; do
+        set -- $(xbps-query -p source-revisions -s "$p" | awk -F': ?' '{print $3" "$2}')
+        curl -L "https://github.com/void-linux/void-packages/raw/$1/srcpkgs/$2/template"
+done

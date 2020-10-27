@@ -1,0 +1,6 @@
+#!/bin/sh
+
+input="$(xsel -p | dmenu)"
+result="$(echo "$input" | mlocate -i -e -r "$input")"
+[ -n "$input" ] && [ -z "$result" ] && exit
+spacefm -r $(dirname "$result") & xdg-open "$result"
