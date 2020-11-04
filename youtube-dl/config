@@ -7,6 +7,9 @@
 --external-downloader aria2c
 --external-downloader-args "-c -j 3 -x 3 -s 3 -k 1M"
 
+# Notification
+--exec "dunstify -a dl 'Youtube-dl  done' '\n'{} -t 60000"
+
 # Defaults
 --no-call-home
 --geo-bypass
