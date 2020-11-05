@@ -3,6 +3,8 @@ wgf=/tmp/win.geo
 # Windows geometry save/restore
 case $1 in
     -s)
+    		# set cache file
+		[ -f "$wgf" ] || touch "$wgf"
 		# Same all windows
 		wmctrl -SlG | tee > $wgf
 		notify-send -a info "Geometry    saved" -u normal -t 5000
