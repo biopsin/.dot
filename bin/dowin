@@ -2,7 +2,7 @@
 
 dws() {
 	# filter wmctrl output; work on win id
-	win="$(wmctrl -Sul |  sed -e 's/  /    -    /; s/voidx/   -   /' | tac | dmenu "$1")"
+	win="$(wmctrl -Sul | awk '{print $1"    --    "$2"    --    "$4}' | tac | dmenu "$1")"
 	# recall selected win id
 	[[ $win ]] && dunstify -C $win && wmctrl -ia $win
 }
