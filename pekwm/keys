@@ -19,10 +19,14 @@ Global {
 	KeyPress = "Mod4 E" { Actions = "Exec ifrun SciTE" }
 	KeyPress = "Mod4 F" { Actions = "Exec ifrun spacefm" }
 	KeyPress = "Mod4 L" { Actions = "Exec /usr/local/bin/dsearch" }
-	KeyPress = "Mod4 O" { Actions = "Exec ifrun osmo" }
 	KeyPress = "Mod4 P" { Actions = "Exec ifrun fpm2" }
 	KeyPress = "Mod4 T" { Actions = "Exec /usr/local/bin/tabbed" }
 	KeyPress = "Mod4 W" { Actions = "Exec /usr/local/bin/palemoon -que" }
+
+# Dunst shortcuts
+	KeyPress = "Ctrl Mod4 space" { Actions = "Exec dunstctl context" }
+	KeyPress = "Ctrl Mod4 Z" { Actions = "Exec dunstctl close-all" }
+	KeyPress = "Ctrl Mod4 H" { Actions = "Exec dunstctl history-pop" }
 
 # Switch desktop
 	KeyPress = "Mod4 F1" { Actions = "GotoWorkspace 1; Exec /usr/local/bin/deskid" }
@@ -48,17 +52,17 @@ Global {
 
 # Window management
 	KeyPress = "F12" { Actions = "Toggle FullScreen" }
-	KeyPress = "Mod4 H" { Actions = "Toggle Maximized True False" }
-	KeyPress = "Mod4 V" { Actions = "Toggle Maximized False True" }
 	KeyPress = "Mod4 I" { Actions = "Exec /usr/local/bin/dowin" }
+	KeyPress = "Mod4 O" { Actions = "Toggle AlwaysOnTop" }
 	KeyPress = "Mod4 S" { Actions = "Toggle Sticky" }
+	KeyPress = "Mod4 V" { Actions = "Toggle Maximized False True" }
 	KeyPress = "Mod4 Q" { Actions = "Close" }
 
 # Window tiling
-	KeyPress = "Mod4 F5" { Actions = "SetLayouter TILE_Dwindle" }
-	KeyPress = "Mod4 F6" { Actions = "SetLayouter TILE_Stacked" }
-	KeyPress = "Mod4 F7" { Actions = "SetLayouter TILE_Boxed" }
-	KeyPress = "Mod4 F8" { Actions = "SetLayouter TILE_Fib" }
+#	KeyPress = "Mod4 F9" { Actions = "SetLayouter TILE_Dwindle" }
+#	KeyPress = "Mod4 F10" { Actions = "SetLayouter TILE_Stacked" }
+#	KeyPress = "Mod4 F11" { Actions = "SetLayouter TILE_Boxed" }
+#	KeyPress = "Mod4 F12" { Actions = "SetLayouter TILE_Fib" }
 
 # Switch windows
 	KeyPress = "Mod4 Tab" { Actions = "Exec /usr/local/bin/dowin -ws" }
@@ -69,7 +73,6 @@ Global {
 # Launch menus
 	KeyPress = "Mod4 Menu" { Actions = "ShowMenu Root" }
 	KeyPress = "Menu" { Actions = "ShowMenu Window" }
-	KeyPress = "Mod4 Z" { Actions = "HideAllMenus" }
 }
 
 Menu {
