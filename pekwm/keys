@@ -21,12 +21,13 @@ Global {
 	KeyPress = "Mod4 L" { Actions = "Exec /usr/local/bin/dsearch" }
 	KeyPress = "Mod4 P" { Actions = "Exec ifrun fpm2" }
 	KeyPress = "Mod4 T" { Actions = "Exec /usr/local/bin/tabbed" }
+	KeyPress = "Ctrl Mod4 T" { Actions = "Exec $TERM" }
 	KeyPress = "Mod4 W" { Actions = "Exec /usr/local/bin/palemoon -que" }
 
 # Dunst shortcuts
-	KeyPress = "Ctrl Mod4 space" { Actions = "Exec dunstctl context" }
 	KeyPress = "Ctrl Mod4 Z" { Actions = "Exec dunstctl close-all" }
 	KeyPress = "Ctrl Mod4 H" { Actions = "Exec dunstctl history-pop" }
+        KeyPress = "Ctrl Mod4 space" { Actions = "Exec dunstctl context" }
 
 # Switch desktop
 	KeyPress = "Mod4 F1" { Actions = "GotoWorkspace 1; Exec /usr/local/bin/deskid" }
@@ -84,5 +85,4 @@ Menu {
 	KeyPress = "Return" { Actions = "Select" }
 	KeyPress = "space" { Actions = "Select" }
 	KeyPress = "Escape" { Actions = "Close" }
-	KeyPress = "Q" { Actions = "Close" }
 }
