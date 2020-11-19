@@ -55,9 +55,9 @@ Global {
 	KeyPress = "F12" { Actions = "Toggle FullScreen" }
 	KeyPress = "Mod4 I" { Actions = "Exec /usr/local/bin/dowin" }
 	KeyPress = "Mod4 O" { Actions = "Toggle AlwaysOnTop" }
+	KeyPress = "Mod4 Q" { Actions = "Close" }
 	KeyPress = "Mod4 S" { Actions = "Toggle Sticky" }
 	KeyPress = "Mod4 V" { Actions = "Toggle Maximized False True" }
-	KeyPress = "Mod4 Q" { Actions = "Close" }
 
 # Window tiling
 #	KeyPress = "Mod4 F9" { Actions = "SetLayouter TILE_Dwindle" }
