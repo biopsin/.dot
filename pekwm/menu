@@ -58,12 +58,12 @@ WindowMenu = "Window Menu" {
 		# ~/.pekwm/config. You will know if you want this.
 		# Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_ws_menu.sh send dynamic" }
 	}
-	Entry = "(Un)Stick" { Actions = "Toggle Sticky" }
 	Entry = "Iconify" { Actions = "Exec /usr/local/bin/dowin" }
 	#Entry = "Iconify" { Actions = "Set Iconified" }
 	Separator {}
-	Entry = "Toggle Always On Top" { Actions = "Toggle AlwaysOnTop" }
-	Entry = "Toggle Always Below" { Actions = "Toggle AlwaysBelow" }
+	Entry = "Toggle OnTop" { Actions = "Toggle AlwaysOnTop" }
+	Entry = "Toggle Below" { Actions = "Toggle AlwaysBelow" }
+	Entry = "Toggle Stick" { Actions = "Toggle Sticky" }
 	Separator {}
 	Entry = "Toggle Horizontal" { Actions = "Toggle Maximized True False" }
 	Entry = "Toggle Vertical" { Actions = "Toggle Maximized False True" }
