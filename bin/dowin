@@ -2,7 +2,7 @@
 
 dws() {
 	# filter wmctrl output; work on win id
-	win="$(wmctrl -Sul | tac | awk 'OFS="    " {$3="";print $0}' | dmenu "$1")"
+	win="$(wmctrl -Sul | tac | awk 'OFS="    " {$3="";print}' | dmenu "$1")"
 	# recall selected win id
 	[[ $win ]] && dunstify -C $win && wmctrl -ia $win
 }
