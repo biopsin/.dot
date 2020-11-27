@@ -10,9 +10,9 @@ net() {
 
 sys() {
 	lb_smem="$(free --mega | awk 'FNR == 2 {print $3}')"
-	lb_deg2="$(cut -c1-2 < /sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/hwmon/hwmon0/temp1_input)"
-	lb_deg1="$(cut -c1-2 < /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input)"
-    lb_fan1="$(cat  /sys/class/hwmon/hwmon0/fan1_input)"
+	lb_deg2="$(cut -c1-2 < /sys/class/hwmon/hwmon1/temp1_input)"
+	lb_deg1="$(cut -c1-2 < /sys/class/hwmon/hwmon0/temp1_input)"
+	lb_fan1="$(cat  /sys/class/hwmon/hwmon0/fan1_input)"
 
 	printf "Mem use : 	$lb_smem MiB\n\nFAN rpm : 	$lb_fan1\nCPU temp : 	$lb_deg2 ºc\nMB temp : 	$lb_deg1 ºc"
 }
@@ -31,11 +31,11 @@ Trash :            $lb_grb files"
 }
 
 case $1 in
-    -net) dunstify "Network" "\n$(net)" -t 30000 -u low ;;
-    -sys) dunstify "System" "\n$(sys)" -t 30000 -u low ;;
-    -drv) dunstify "Disks free" "\n$(drv)" -t 30000 -u low ;;
-    -upd) dunstify "xbps" "\n$(xbps-install -nuM | wc -l) - New package(s)" -t 30000 -u normal ;;
-    -all)
+	-net) dunstify "Network" "\n$(net)" -t 30000 -u low ;;
+	-sys) dunstify "System" "\n$(sys)" -t 30000 -u low ;;
+	-drv) dunstify "Disks free" "\n$(drv)" -t 30000 -u low ;;
+	-upd) dunstify "xbps" "\n$(xbps-install -nuM | wc -l) - New package(s)" -t 30000 -u normal ;;
+	-all)
 		dunstify -a info "$(hostname)" "\n$(uname -r)" -t 31000
 		dunstify "Uptime" "\n$(uptime | cut -b11-)" -t 30000 -u normal
 		dunstify "Network" "\n$(net)" -t 30000 -u low
