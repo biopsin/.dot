@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Check update packages
-dunstify -a info -r 1169 "xbps" "\n$(xbps-install -nuM | wc -l) - New package(s)" -t 60000 -u normal
+res="$(xbps-install -nuM | wc -l)"
+[ $res != 0 ] && dunstify -a info -r 1169 "Update xbps" "\n$res - New package(s)"
 
 # Daily forunes
 dunstify -r 6718 "Daily Fortune" "\n$(/usr/bin/fortune)" -t 60000 -u low
