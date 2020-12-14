@@ -1,4 +1,4 @@
-#!/usr/bin/dash
+#!/usr/bin/sh
 
 [ -d /etc/X11/xinit/xinitrc.d ] && \
 for f in /etc/X11/xinit/xinitrc.d/*; do [ -x "$f" ] && . "$f"; done && unset f
