@@ -112,20 +112,21 @@ export HISTSIZE=1000
 export HISTFILESIZE=${HISTSIZE}
 export HISTTIMEFORMAT="%d/%m %t"
 export HISTCONTROL="ignoreboth:erasedups"
-shopt -s checkwinsize
-shopt -s histappend
-shopt -s autocd
-shopt -s extglob
+export HISTFILE=~/.cache/shell_history
 
 export LESS='-iR -j4 --shift 5 -P ?n?f%f .?m(file %i of %m) ..?ltlines %lt-%lb?L/%L. :byte %bB?s/%s. .?e(END) ?x- Next\: %x.:?pB%pB\%..%t'
-
 export TERM=st-256color
 export PAGER=/usr/bin/less
 export EDITOR=/usr/bin/nano
 export BROWSER=/usr/bin/palemoon
 
-# Fix del in st
-tput smkx
-
 # shell
 PS1="\e]0;\W\a\e[0m\n \[$(tput setaf 2)\]\w \$ \[$(tput sgr0)\]"
+
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s autocd
+shopt -s extglob
+
+# Fix del in st
+tput smkx
