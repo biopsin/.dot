@@ -116,13 +116,14 @@ shopt -s histappend
 shopt -s autocd
 shopt -s extglob
 
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_mb=$'\e[6m'
+export LESS_TERMCAP_md=$'\e[32m'
+export LESS_TERMCAP_us=$'\e[4;32m'
+export LESS_TERMCAP_so=$'\e[30;41m'
 export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS='-iR -j4 --shift 5 -P ?n?f%f .?m(file %i of %m) ..?ltlines %lt-%lb?L/%L. :byte %bB?s/%s. .?e(END) ?x- Next\: %x.:?pB%pB\%..%t'
 
 export TERM="st-256color"
 export EDITOR="/usr/bin/nano"
