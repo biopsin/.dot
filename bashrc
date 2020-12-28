@@ -132,4 +132,4 @@ export BROWSER="/usr/bin/palemoon"
 tput smkx
 
 # shell
-PS1="\[\e]0;\W\a\e[0m\n \[$(tput setaf 2)\]\w \$ \[$(tput sgr0)\]"
+PS1="\e]0;\W\a\e[0m\n \[$(tput setaf 2)\]\w \$ \[$(tput sgr0)\]"
