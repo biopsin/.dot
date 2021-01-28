@@ -1,0 +1,46 @@
+# quick help
+function qh() (
+	function qh1 () {
+		out="$(help "$1" 2>&1 )"
+		[ $? -ne 0 ] && return 1
+		echo "$out"
+	}
+
+	type -a "$1" ; { qh1 "$1" || "$1" --help 2>/dev/null || man "$1" 2>/dev/null ;} | egrep -i -- "$2"
+)
+
+# list zombies
+defunct() {
+    echo "Children:"
+    ps -ef | head -n1
+    ps -ef | grep defunct
+    echo "------------------------------"
+    echo "Parents:"
+    ppids="$(ps -ef | grep defunct | awk '{ print $3 }')"
+    echo "$ppids" | while read ppid; do
+		ps -A | grep "$ppid"
+    done
+}
+
+# extract file
+extract() {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2)	tar xjvf $1 ;;
+			*.tar.gz)	tar xzvf $1 ;;
+			*.tar.xz)	tar xJvf $1 ;;
+			*.tbz2)	tar xjvf $1 ;;
+			*.tgz)	tar xzvf $1 ;;
+			*.tar)	tar xfv $1 ;;
+			*.rar)	7z x $1 ;;
+			*.zip)	7z X $1 ;;
+			*.gz)	gzip $1 ;;
+			*.lz)	lzip $1 ;;
+			*.xz)	7z x $1 ;;
+			*.7z)	7z x $1 ;;
+			*)	echo "'$1' cannot be extracted via extract()" ;;
+		esac
+			else
+		echo "'$1' is not a valid file"
+	fi
+}

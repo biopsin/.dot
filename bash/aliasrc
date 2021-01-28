@@ -1,0 +1,55 @@
+# Enable color and handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color'
+    alias ll='ls -lha --color'
+    alias lld='ls -ld */ --color'
+    alias grep='grep --color'
+fi
+
+# General
+alias startx='startx -- :0 vt3'
+alias xx='exit'
+alias ..='cd ..'
+alias gh='history | grep -i $1'
+alias catn='cat -n'
+alias nano="nano -l"
+alias df='df -H'
+alias du='du -sh'
+alias free='free -h && ps -e -orss=,%mem,args= | sort -nr | head'
+alias pstree='pstree -l'
+alias ping='ping -4 -c 5'
+alias xp='xprop | egrep -w "WM_CLASS|WM_NAME|WM_WINDOW_ROLE"'
+alias colr="sed 's/^-/\x1b[41m-/;s/^+/\x1b[42m+/;s/^@/\x1b[34m@/;s/$/\x1b[0m/'"
+alias top="top -U userx"
+alias aria-dl='aria2c --conf-path=$HOME/.config/aria2/aria2c.conf'
+
+# Container
+alias c-user='contain -n -u 1000:1000:1 -g 1000:1000:1 /media/workr/void-contain/ /bin/bash'
+alias c-root='contain -n /media/workr/void-contain/ /bin/bash'
+
+# xbps
+alias xbps-q='/usr/bin/xbps-query -vRs'
+alias xbps-lrh='/usr/bin/xbps-query -p repolock -s "" && /usr/bin/xbps-query -p hold -s "" '
+alias xbps-u='/usr/bin/doas xbps-install -Su'
+alias xbps-i='/usr/bin/doas xbps-install -S'
+alias xbps-li='/usr/bin/doas xbps-install -R .'
+alias xbps-r='/usr/bin/doas xbps-remove -R'
+alias xbps-h='/usr/bin/doas xbps-pkgdb -m hold'
+alias xbps-uh='/usr/bin/doas xbps-pkgdb -m unhold'
+alias xbps-rl='/usr/bin/doas xbps-pkgdb -m repolock'
+alias xbps-rul='/usr/bin/doas xbps-pkgdb -m repounlock'
+alias xbps-clean='/usr/bin/doas xbps-remove -Oo'
+
+alias rindex-add='xbps-rindex -a . *.xbps'
+alias rindex-clean='xbps-rindex -c .'
+alias rindex-remove='xbps-rindex -r .'
+alias vkpurge-clean='/usr/bin/doas vkpurge rm all'
+
+# System
+alias more='less'
+alias updb='doas mupdatedb'
+alias vcsdump='doas fold /dev/vcs1'
+alias dmesg-last='doas dmesg --color | tail -n 100'
+alias dmesg-error='doas dmesg | egrep -i --color "error|critical|failed"'
+alias rebooot='/usr/bin/doas reboot'
