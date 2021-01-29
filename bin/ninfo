@@ -1,47 +1,35 @@
 #!/usr/bin/bash
+
 # Get daily temperture from yr.no
 yr() {
-    yrl="https://retro.yr.no/place/Norway/Oslo/Oslo/Hauketo/"
-    gurl=$(curl -s $yrl | grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
-    printf "$gurl"
-}
-
-nyr() {
-    dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(yr)" -t 60000 -u low
+	yrl="https://retro.yr.no/place/Norway/Oslo/Oslo/Hauketo/"
+	gurl=$(curl -s $yrl | grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
+	dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo $gurl)" -t 60000 -u low
 }
 
 # Currency exchange NOK 1.0
 cur() {
-    cget=$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | grep -Eo "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*")
-    printf "$cget"
-}
-
-ncur() {
-    dunstify "Rate NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(cur)" -t 60000 -u low
+	cget=$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | egrep -o "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*")
+	dunstify "Rate NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo $cget)" -t 60000 -u low
 }
 
 # Tomorrows plan on underskog.no
 us() {
-    udt=$(date --date='tomorrow' +'%Y/%m/%d')
-    usu="https://underskog.no/kalender/liste/$udt"
-    usg=$(curl -s $usu | html2text | awk -F'[][]' '{print $2}' | awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
-    printf "$usg"
-}
-
-nus() {
-    dunstify "Underskog" "<a href=\"https://underskog.no/kalender\"></a>\n$(us)" -t 60000 -u low
+	udt=$(date --date='tomorrow' +'%Y/%m/%d')
+	usu="https://underskog.no/kalender/liste/$udt"
+	usg=$(curl -s $usu | html2text | awk -F'[][]' '{print $2}' | awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
+	dunstify "Underskog" "<a href=\"https://underskog.no/kalender\"></a>\n$(echo $usg)" -t 60000 -u low
 }
 
 # Options
 case $1 in
-    -yr) $(nyr) ;;
-    -cur) $(ncur) ;;
-    -us) $(nus) ;;
-    -all) $(nyr) && $(ncur) && $(nus) ;;
-    *)    printf "Show info as notification
+    -yr) $(yr) ;;
+    -cur) $(cur) ;;
+    -us) $(us) ;;
+    -all) $(yr) && $(cur) && $(us) ;;
+    *)	printf "Show info as notification
  -all : Show all notifications
  -yr  : Show weather from yr.no
  -cur : Show daily currency rates
  -us  : Show news from underskog.no" ;;
 esac
-
