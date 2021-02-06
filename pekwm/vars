@@ -1,0 +1,3 @@
+#$TERM="/usr/bin/st -t "Terminal" -f "Dejavu Sans Mono:style=Book:size=13" -g "99x32""
+$LOCAL="/usr/local/bin"
+$DESKID="/usr/local/bin/deskid"

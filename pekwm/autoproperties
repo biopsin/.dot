@@ -1,0 +1,80 @@
+Require {
+	Templates = "True"
+}
+
+// Start of autoproperties
+
+Property = "(st|256color),(st|256color)" {
+	Title = "(\/usr\/bin\/sudo|\/bin\/bash)"
+ 	ApplyOn = "New"
+	ClientGeometry = "286x54+10-10"
+}
+
+Property = "tabbed,tabbed" {
+ 	ApplyOn = "New"
+	ClientGeometry = "+10+10"
+}
+
+Property = "spacefm,Spacefm,file_manager" {
+ 	ApplyOn = "New"
+	ClientGeometry = "948x1065+10-10"
+}
+
+Property = "spacefm,Spacefm" {
+	Title = "Find Files"
+ 	ApplyOn = "New"
+	ClientGeometry = "800x800"
+}
+
+Property = "abiword,Abiword,topLevelWindow" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1334x1785+1252+186"
+}
+
+Property = "epdfview,Epdfview" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1270x1800"
+}
+
+Property = "osmo,Osmo" {
+ 	ApplyOn = "New"
+	ClientGeometry = "420x520-10-10"
+}
+
+Property = "viewnior,Viewnior" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1920x1280-960-440"
+}
+
+Property = "nufraw-gimp,Gimp-2.10" {
+	Title = ".* nUFRaw"
+ 	ApplyOn = "new"
+	ClientGeometry = "1600x1280+1120+440"
+}
+
+Property = "sweep,Sweep" {
+	Title = ".* Sweep 0.9.3"
+ 	ApplyOn = "new"
+	ClientGeometry = "1920x720+960+540"
+}
+
+Property = "Places,Pale moon,Organizer" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1280x1670+1280+200"
+}
+
+Property = "Global,Pale moon,console" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1280x1670+1280+150"
+}
+
+Property = "Navigator,Pale moon,view-source" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1280x1670+1280+150"
+}
+
+// End of autoproperties
+
+TypeRules {
+	INCLUDE = "$_PEKWM_ETC_PATH/autoproperties_typerules"
+}

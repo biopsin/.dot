@@ -1,0 +1,68 @@
+# Add configuration overrides here, it possible to add sections,
+# sub-section and values overriding/adding specific values.
+INCLUDE = "vars"
+
+RootMenu = "Pekwm" {
+	Entry = "Dmenu" { Actions = "Exec $LOCAL/drun-hist" }
+	Entry = "Terminal" { Actions = "Exec ifrun st" }
+	Entry = "Spacefm" { Actions = "Exec ifrun spacefm" }
+	Entry = "Pale Moon" { Actions = "Exec $LOCAL/palemoon" }
+	Separator {}
+	Submenu = "Audio" {
+		Entry = "Sweep" { Actions = "Exec ifrun sweep" }
+		Entry = "Reaper" { Actions = "Exec ifrun cockos-reaper" }
+		Separator {}
+		Entry = "Alsamixer" { Actions = "Exec $LOCAL/tabbed alsamixer" }
+	}
+	Submenu = "Devel" {
+		Entry = "Gimp" { Actions = "Exec ifrun gimp" }
+		Entry = "Blender" { Actions = "Exec ifrun blender" }
+		Separator {}
+		Entry = "Abiword" { Actions = "Exec ifrun abiword" }
+		Entry = "Scite" { Actions = "Exec ifrun SciTE" }
+	}
+	Submenu = "Utilities" {
+		Entry = "Fontview" { Actions = "Exec ifrun gtk2fontsel" }
+		Entry = "Colorview" { Actions = "Exec ifrun gcolor2" }
+	}
+	Separator {}
+	Submenu = "Settings" {
+		Submenu = "Themes" {
+			Entry = "Gtk theme" { Actions = "Exec ifrun lxappearance" }
+			Separator {}
+			Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_themeset.sh $_PEKWM_THEME_PATH" }
+			Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_themeset.sh ~/.config/pekwm/themes" }
+		}
+		Submenu = "Pekwm" {
+			Entry = "Reload" { Actions = "Reload" }
+			Entry = "Restart" { Actions = "Restart" }
+			Entry = "Exit" { Actions = "Exec $LOCAL/dvoid" }
+		}
+	}
+}
+
+WindowMenu = "Window Menu" {
+	SubMenu = "Send To" {
+		# Create sendto menu once per pekwm config reload. The fast way that
+		# will work for most if not all users.
+		COMMAND = "$_PEKWM_SCRIPT_PATH/pekwm_ws_menu.sh send"
+		# Create sendto menu every time the menu is opened. The slow way.
+		# This is what you want if you are using external tools to make
+		# the amount of workspaces something else than what you define in
+		# ~/.pekwm/config. You will know if you want this.
+		# Entry = "" { Actions = "Dynamic $_PEKWM_SCRIPT_PATH/pekwm_ws_menu.sh send dynamic" }
+	}
+	Entry = "Iconify" { Actions = "Exec $LOCAL/dowin" }
+	#Entry = "Iconify" { Actions = "Set Iconified" }
+	Separator {}
+	Entry = "Toggle On Top" { Actions = "Toggle AlwaysOnTop" }
+	Entry = "Toggle Below" { Actions = "Toggle AlwaysBelow" }
+	Entry = "Toggle Stick" { Actions = "Toggle Sticky" }
+	Separator {}
+	Entry = "Toggle Horizontal" { Actions = "Toggle Maximized True False" }
+	Entry = "Toggle Vertical" { Actions = "Toggle Maximized False True" }
+	Entry = "Toggle Full" { Actions = "Toggle Maximized True True" }
+	Separator {}
+	Submenu = "Kill" { Entry = "Kill application" { Actions = "Kill" } }
+	Entry = "Close" { Actions = "Close" }
+}
