@@ -1,0 +1,24 @@
+#!/bin/sh
+
+xall() {
+    sync
+	# Find all running applications
+	winid=$(wmctrl -l | cut -f1)
+	for i in $winid;
+	  do wmctrl -ic "$i" && sleep 0.5;
+	done
+
+	# End dbus-daemon
+	[ -n $(pidof -s dbus-daemon) ] && killall dbus-daemon
+
+	# End WM
+	[ -n $(pidof -s pekwm) ] && killall pekwm
+}
+
+choice=$(printf "1  :  Suspend\n2  :  Exit\n3  :  Reboot\n4  :  Shutdown" | dmenu | cut -d ' ' -f 1)
+case $choice in
+    1) sync && doas zzz ;;
+    2) xall ;;
+    3) xall && doas reboot ;;
+    4) xall && doas poweroff ;;
+esac

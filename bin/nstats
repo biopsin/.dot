@@ -1,0 +1,44 @@
+#!/usr/bin/bash
+
+# Other external ip service "curl api.ipify.org"
+net() {
+	get_eip="$(curl -s https://ipinfo.io/ip)"
+	get_lip="$(ip addr | awk '/enp4s0/ && /inet/ {gsub(/\/[0-9][0-9]/,""); print $2}')"
+	get_con="$(ss -s | awk '$1 ~ /INET/ {print $2}')"
+	printf "External :  $get_eip\nLocal : 	$get_lip\n\nConnections : 	$get_con"
+}
+
+sys() {
+	lb_smem="$(awk '/MemFree/ {printf( "%.2f", $2 / 1024^2 )}' /proc/meminfo)"
+	lb_deg2="$(cut -c1-2 < /sys/class/hwmon/hwmon1/temp1_input)"
+	lb_deg1="$(cut -c1-2 < /sys/class/hwmon/hwmon0/temp1_input)"
+	lb_fan1="$(cat  /sys/class/hwmon/hwmon0/fan1_input)"
+	printf "Mem free : 	$lb_smem G\n\nFAN rpm : 	$lb_fan1\nCPU temp : 	$lb_deg2 ºc\nMB temp : 	$lb_deg1 ºc"
+}
+
+drv() {
+	lb_sdc="$(df -h /media/store | tail -1 | cut -c29-33)"
+	lb_sdb="$(df -h /media/workr | tail -1 | cut -c29-33)"
+	lb_p4h="$(df -h /home | tail -1 | cut -c29-33)"
+	lb_p3s="$(df -h / | tail -1 | cut -c29-33)"
+	lb_p2b="$(df -h /boot | tail -1 | cut -c29-33)"
+	lb_grb="$(ls /media/store/.Trash/files | wc -l)"
+	printf "Boot :             $lb_p2b\nSystem :          $lb_p3s\n
+Home :            $lb_p4h\nStore :             $lb_sdc\nWork :             $lb_sdb\n
+Trash :            $lb_grb files"
+}
+
+case $1 in
+	-net) dunstify "Network" "\n$(net)" -t 30000 -u low ;;
+	-sys) dunstify "System" "\n$(sys)" -t 30000 -u low ;;
+	-drv) dunstify "Disks free" "\n$(drv)" -t 30000 -u low ;;
+	-upd) dunstify "xbps" "\n$(xbps-install -nuM | wc -l) - New package(s)" -t 30000 -u normal ;;
+	-all)
+		dunstify -a info "$(hostname)" "\n$(uname -r)" -t 31000
+		dunstify "Uptime" "\n$(uptime | cut -b11-)" -t 30000 -u normal
+		dunstify "Network" "\n$(net)" -t 30000 -u low
+		dunstify "System" "\n$(sys)" -t 30000 -u low
+		dunstify "Disks free" "\n$(drv)" -t 30000 -u low
+		;;
+	*) printf "Show stats as notification\n  -all : Show all notifications\n  -net : Show network\n  -sys : Show system\n  -drv : Show disks\n  -upd : Check xbps updates" ;;
+esac

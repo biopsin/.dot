@@ -1,0 +1,3 @@
+#!/bin/sh
+# Switch if running, else launch with .desktop exec args
+wmctrl -R "$1" -x || $(awk -F= '/^Exec/||/^TryExec/ {$1="";print;exit}' /usr/share/applications/"$1".desktop | sed 's/%.//') &

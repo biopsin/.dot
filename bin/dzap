@@ -1,0 +1,10 @@
+#!/bin/sh
+choice="$(printf "1  :  Clipmenu\n2  :  Shell cache\n3  :  Dmenu cache\n4  :  DoWin cache\n5  :  Trash files" | dmenu | cut -d ' ' -f 1)"
+
+case $choice in
+	1) dclipmenu --zap && notify-send "Purged" "\nClipmenu cache" -t 5000 -u critical ;;
+	2) > $HOME/.cache/shell_history && notify-send "Purged" "\nShell cache" -t 5000 -u critical ;;
+	3) > $HOME/.cache/dmenu_history && notify-send "Purged" "\nDmenu cache" -t 5000 -u critical ;;
+	4) dowin -zap && notify-send "Purged" "\nDoWin Cache" -t 5000 -u critical ;;
+	5) trash --empty && notify-send "Purged" "\nTrash files" -t 5000 -u critical ;;
+esac

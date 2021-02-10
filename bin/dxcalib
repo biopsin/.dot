@@ -1,0 +1,18 @@
+#!/usr/bin/dash
+# Change display brightness
+list () {
+    echo "Reset  :  -clear"
+    echo " 30%   :  -co 30 -gc 1.30"
+    echo " 40%   :  -co 40 -gc 1.25"
+    echo " 50%   :  -co 50 -gc 1.20"
+    echo " 60%   :  -co 60 -gc 1.15"
+    echo " 70%   :  -co 70 -gc 1.10"
+    echo " 80%   :  -co 80 -gc 1.05"
+    echo " 90%   :  -co 90 -gc 1.00"
+    echo " 90%   :  -co 90 -gc 1.00"
+}
+
+sel=$(list | dmenu)
+test -n "$sel" || exit
+
+xcalib $(echo "$sel -v /usr/share/xcalib/gamma_1_0.icc" | cut -d ":" -f 2) >/dev/null

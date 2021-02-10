@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+shopt -s nullglob
+
+cache_dir=$HOME/.cache/clipmenu
+cache_file=$cache_dir/line_cache
+	
+case $1 in
+    --zap)
+        > $cache_file
+        rm $cache_dir/[1-9]*
+	;;
+
+    *)
+        chosen_line=$(tac "$cache_file" | awk '!seen[$0]++' | dmenu "$@")
+
+        [[ $chosen_line ]] || exit 1
+
+       file=$cache_dir/$(cksum <<< "$chosen_line")
+
+        if ! [[ -f "$file" ]]; then
+          # We didn't find this in cache
+          printf 'FATAL: %s not in cache\n' "$chosen_line" >&2
+          exit 2
+        fi
+
+        for selection in clipboard; do
+          xsel --logfile /dev/null -i --"$selection" < "$file"
+        done
+	;;
+
+esac
+exit 0

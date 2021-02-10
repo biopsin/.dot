@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+#set -x
+pingf(){
+    ! ping -w 1 -q -c 1 192.168.1."$1" > /dev/null || printf "IP %s is up\n" 192.168.1."$1"
+}
+
+main(){
+    NUM=1
+    while [ $NUM -lt 255  ]; do 
+        pingf "$NUM" &
+        NUM=$(expr "$NUM" + 1)
+    done
+    wait
+}
+
+main

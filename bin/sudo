@@ -1,0 +1,3 @@
+#!/bin/sh
+# Sudo shim for doas
+exec doas -- "$@"

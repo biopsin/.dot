@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+choice=$(echo -e "1:  Find files\n2:  Locate files" | dmenu | cut -d ':' -f 1)
+case $choice in
+    1)
+        find $HOME/ | sed 's/ /\\ /g' | dmenu | xargs xdg-open $1 
+	;;
+    2)
+        input="$(xsel -p | dmenu)"
+        if [ "$input" != '' ]
+          then
+	        result="$(echo "$input" | mlocate -i -e -r "$input" | dmenu)"
+	      if [ "$result" = '' ]
+	        then
+	          exit
+		  else
+	        echo -n "$result" | xsel -b
+	        xdg-open "$result" && spacefm -r $(dirname "$result") &	
+	      fi
+        fi
+	;;
+esac

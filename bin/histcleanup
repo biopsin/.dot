@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+
+f = open('/home/userx/.bash_history')
+l = f.readlines()
+l.reverse()
+short = []
+for s in l:
+    if s.rstrip() not in short:
+        short.append(s.rstrip())
+short.reverse()
+for s in short:
+    print (s)
