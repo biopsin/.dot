@@ -1,2 +1,0 @@
-/usr/bin/dmenu -i -l 9 -x 1560 -w 720 -fn DejavuSans:style=Book:pixelsize=16 \
-	-nb "#FDF6E3" -nf "#555555" -sb "#657B83" -sf "#FFFFFF"

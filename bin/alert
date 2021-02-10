@@ -1,2 +1,0 @@
-#!/bin/sh
-aplay -q /usr/local/share/sounds/alert.wav &
