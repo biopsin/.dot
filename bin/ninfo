@@ -8,9 +8,10 @@ yr() {
 }
 
 # Currency exchange NOK 1.0
-cur() {
+cr() {
     cgt=$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | \
-                grep -Eo "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*" | sed 's/":/ = /g')
+				egrep -o "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*" | \
+				sed 's/":/ /g' | awk -v n=100 '{print $1 " = " $2*n}')
     dunstify "Rate NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo "$cgt")" -t 60000 -u low
 }
 
@@ -25,12 +26,12 @@ us() {
 # Options
 case $1 in
     -yr) $(yr) ;;
-    -cur) $(cur) ;;
+    -cr) $(cr) ;;
     -us) $(us) ;;
-    -all) $(yr) && $(cur) && $(us) ;;
+    -all) $(yr) && $(cr) && $(us) ;;
     *)	printf "Show info as notification
  -all : Show all notifications
  -yr  : Show weather from yr.no
- -cur : Show daily currency rates
+ -cr : Show daily currency rates
  -us  : Show news from underskog.no" ;;
 esac
