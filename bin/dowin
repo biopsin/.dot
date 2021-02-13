@@ -24,13 +24,13 @@ cid() {
 	#wmctrl -ia $wid &&
 
 	# capture, minimize and dock; then restore on action
-	scrot -u $diw/$wid.png -t 128x128 -o && wmctrl -iY $wid && \
+	[[ -n $wid ]] && scrot -u $diw/$wid.png -t 128x128 -o && wmctrl -iY $wid && \
 	[[ $(dunstify -a dock -r $wid -A Y," Docked - $wid" -I "$diw/$wid-thumb.png" "•") = Y ]] && \
 	wmctrl -ia $wid && exit
 }
 
 case $1 in
-	-zap) rm /tmp/diw/"0x*" ;;
+	-zap) rm /tmp/diw/0x*.png ;;
 	-ws) dws ;;
     *)	cid ;;
 esac
