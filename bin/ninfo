@@ -2,23 +2,24 @@
 
 # Get daily temperture from yr.no
 yr() {
-	yrl="https://retro.yr.no/place/Norway/Oslo/Oslo/Hauketo/"
-	gurl=$(curl -s $yrl | grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
-	dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo $gurl)" -t 60000 -u low
+    yrl=$(curl -s "https://retro.yr.no/place/Norway/Oslo/Oslo/Hauketo/" | \
+                grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
+    dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo "$yrl")" -t 60000 -u low
 }
 
 # Currency exchange NOK 1.0
 cur() {
-	cget=$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | egrep -o "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*")
-	dunstify "Rate NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo $cget)" -t 60000 -u low
+    cgt=$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | \
+                grep -Eo "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*" | sed 's/":/ = /g')
+    dunstify "Rate NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo "$cgt")" -t 60000 -u low
 }
 
 # Tomorrows plan on underskog.no
 us() {
-	udt=$(date --date='tomorrow' +'%Y/%m/%d')
-	usu="https://underskog.no/kalender/liste/$udt"
-	usg=$(curl -s $usu | html2text | awk -F'[][]' '{print $2}' | awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
-	dunstify "Underskog" "<a href=\"https://underskog.no/kalender\"></a>\n$(echo $usg)" -t 60000 -u low
+    usu="https://underskog.no/kalender/liste/$(date --date='tomorrow' +'%Y/%m/%d')"
+    usg=$(curl -s $usu | html2text | awk -F'[][]' '{print $2}' | \
+                awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
+    dunstify "Underskog" "<a href=\"https://underskog.no/kalender\"></a>\n$(echo "$usg")" -t 60000 -u low
 }
 
 # Options
