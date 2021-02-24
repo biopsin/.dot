@@ -1,13 +1,17 @@
-#!/bin/sh
-
-# Check update packages
+#!/usr/bin/sh
+# Check daily updateted packages
 res="$(xbps-install -nuM | wc -l)"
-[ $res != 0 ] && dunstify -a info -r 1169 "Update xbps" "\n$res - New package(s)"
+[ $res != 0 ] && dunstify -a info -r 1169 "Update xbps" "\n$res - New package(s)" -t 60000
 
+# Check daily weather
+yrl=$(curl -s "https://retro.yr.no/place/Norway/Oslo/Oslo/Hauketo/" | grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
+dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo "$yrl")" -t 60000 -u low
+    
 # Daily forunes
-dunstify -r 6718 "Daily Fortune" "\n$(/usr/bin/fortune)" -t 60000 -u low
+dunstify -r 6718 "Daily fortune" "\n$(/usr/bin/fortune)" -t 60000 -u low
 
-# Clean bash history
-/usr/local/bin/histcleanup > /tmp/hist.clean
-mv -f /tmp/hist.clean /home/userx/.bash_history
-dunstify "Bash" "\nHistory	cleaned" -t 30000 -u low
+# Clean daily bash history
+/usr/local/bin/cleanshellhist > /tmp/hist.clean
+mv -f /tmp/hist.clean /home/userx/.cache/bash_history
+dunstify "Bash" "\nHistory    cleaned" -t 30000 -u normal
+
