@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+# Simple time syncer
+
+# Pull the data from someone
+date +"%d %b %Y %T %Z" -s "$(curl -s --head https://yr.no | grep '^Date:' | cut -d' ' -f 3-)"
+
+# Sync sys to hw clock
+hwclock --systohc --update-drift --utc
