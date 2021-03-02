@@ -19,9 +19,9 @@
 set -eo pipefail; [[ $TRACE ]] && set -x
 
 readonly VERSION="2.2.01"
-readonly OPENSSL_CIPHER_TYPE="aes-256-cbc"
+readonly CIPHER_TYPE="aes-256-cbc"
 
-export CRYPTR_PASSWORD=$(cat $HOME/.config/creds/cryptp)
+export CRYPTR_PASS=$(cat $HOME/.config/creds/cryptp)
 ITER=$(cat $HOME/.config/creds/crypti)
 
 cryptr_version() {
@@ -47,12 +47,12 @@ cryptr_encrypt() {
     exit 4
   fi
 
-  if [[ ! -z "${CRYPTR_PASSWORD}" ]]; then
-    echo "[notice] using environment variable CRYPTR_PASSWORD for the password"
-    openssl $OPENSSL_CIPHER_TYPE -e -salt -pbkdf2 -iter $ITER \
-        -in "$_file" -out "${_file}.+" -pass env:CRYPTR_PASSWORD
+  if [[ ! -z "${CRYPTR_PASS}" ]]; then
+    echo "[notice] using environment variable for the password"
+    openssl $CIPHER_TYPE -e -salt -pbkdf2 -iter $ITER \
+        -in "$_file" -out "${_file}.+" -pass env:CRYPTR_PASS
   else
-    openssl $OPENSSL_CIPHER_TYPE -e -salt -pbkdf2 -iter $ITER \
+    openssl $CIPHER_TYPE -e -salt -pbkdf2 -iter $ITER \
         -in "$_file" -out "${_file}.+"
   fi
 }
@@ -64,12 +64,12 @@ local _file="$1"
     exit 5
   fi
 
-  if [[ ! -z "${CRYPTR_PASSWORD}" ]]; then
-    echo "[notice] using environment variable CRYPTR_PASSWORD for the password"
-    openssl $OPENSSL_CIPHER_TYPE -d -salt -pbkdf2 -iter $ITER \
-        -in "$_file" -out "${_file%\.+}" -pass env:CRYPTR_PASSWORD
+  if [[ ! -z "${CRYPTR_PASS}" ]]; then
+    echo "[notice] using environment variable for the password"
+    openssl $CIPHER_TYPE -d -salt -pbkdf2 -iter $ITER \
+        -in "$_file" -out "${_file%\.+}" -pass env:CRYPTR_PASS
   else
-    openssl $OPENSSL_CIPHER_TYPE -d -salt -pbkdf2 -iter $ITER \
+    openssl $CIPHER_TYPE -d -salt -pbkdf2 -iter $ITER \
         -in "$_file" -out "${_file%\.+}"
   fi
 }
