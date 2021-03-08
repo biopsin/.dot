@@ -16,7 +16,7 @@ Define = "Base" {
 	Tab {
 		Focused = "Empty"
 		FocusedSelected = "Empty"
-		Unfocused	 = "Empty"
+		Unfocused = "Empty"
 		UnfocusedSelected = "Empty"
 	}
 
@@ -110,26 +110,26 @@ Menu {
 
 	Focused {
 		Font = "$FONT"
-        Background = "Empty"
-    	Item = "Solid #ffffff"
+		Background = "Empty"
+		Item = "Solid #ffffff"
 		Text = "#222222" 
 		Separator = "Solid #222222 1x1"
-        Arrow = "Solid #222222 4x4"
+		Arrow = "Solid #222222 4x4"
   	}
 
   	Unfocused {
-    	Font = "$FONT"
-        Background = "Empty"
-    	Item = "Solid #ffffff"
+		Font = "$FONT"
+		Background = "Empty"
+		Item = "Solid #ffffff"
 		Text = "#222222"
 		Separator = "Solid #222222 1x1"
-        Arrow = "Solid #222222 4x4"
+		Arrow = "Solid #222222 4x4"
   	}
 
   	Selected {
 		Font = "$FONT"
 		Background = "Empty"
-		Item	= "Solid #9dbc8e"
+		Item = "Solid #9dbc8e"
 		Text = "#ffffff"
 		Arrow = "Solid #222222 4x4"
   	}
