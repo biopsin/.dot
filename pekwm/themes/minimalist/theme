@@ -1,5 +1,5 @@
-$FONT = "XFT#DejaVu Sans:size=11#left"
-$FONT_TITLE = "XFT#DejaVu Sans:size=11#center#1 1"
+$FONT = "XFT#DejaVu Sans:size=11#LEFT"
+$FONT_TITLE = "XFT#DejaVu Sans:size=11#CENTER#1 1"
 
 Require {
 	Templates = "False"
@@ -7,11 +7,11 @@ Require {
 
 Define = "Base" {
 	Height = "0"
+	HeightAdapt = "False"
 	Pad = "0 0 0 0"
 
-	Font {
-		Focused = "$FONT_TITLE"
-	}
+	Focused = "Empty"
+	Unfocused = "Empty"
 
 	Tab {
 		Focused = "Empty"
@@ -20,16 +20,20 @@ Define = "Base" {
 		UnfocusedSelected = "Empty"
 	}
 
+	Separator {
+		Focused = "Empty"
+		Unfocused = "Empty"
+	}
+
+	Font {
+		Focused = "$FONT_TITLE"
+	}
+
 	FontColor {
 		Focused = "#222222"
 		FocusedSelected = "#222222"
 		Unfocused = "#222222"
 		UnfocusedSelected = "#222222"
-	}
-
-	Separator {
-		Focused = "Empty"
-		Unfocused = "Empty"
 	}
 
 	Border {
@@ -57,111 +61,44 @@ Define = "Base" {
 	}
 }
 
-Define = "Menu" {
+Decor = "DEFAULT" {
+	@Base
+}
+
+Decor = "MENU" {
+	@Base
+
+	Border {
+		Focused {
+			TopLeft = "Empty"
+			Top = "Empty"
+			TopRight = "Empty"
+			Left = "Empty"
+			Right = "Empty"
+			BottomLeft = "Empty"
+			Bottom = "Empty"
+			BottomRight = "Empty"
+		}
+
+		Unfocused {
+			TopLeft = "Empty"
+			Top = "Empty"
+			TopRight = "Empty"
+			Left = "Empty"
+			Right = "Empty"
+			BottomLeft = "Empty"
+			Bottom = "Empty"
+			BottomRight = "Empty"
+		}
+	}
+}
+
+Decor = "WORKSPACEINDICATOR" {
+	@Base
+	
+
 	Height = "0"
-	Pad = "0 0 0 0"
-
-	Focused = "Empty"
-	Unfocused = "Empty"
-
-	Font {
-		Focused = "Empty"
-	}
-
-	FontColor {
-		Focused = "#222222"
-		FocusedSelected = "#222222"
-		Unfocused = "#222222"
-		UnfocusedSelected = "#222222"
-	}
-
-	Tab {
-		Focused = "Empty"
-		FocusedSelected = "Empty"
-		Unfocused = "Empty"
-		UnfocusedSelected = "Empty"
-	}
-
-	Separator {
-		Focused = "Empty"
-		Unfocused = "Empty"
-	}
-
-	Border {
-		Focused {
-			TopLeft = "Solid #ffffff 0x0"
-			Top = "Solid #ffffff 0x0"
-			TopRight = "Solid #ffffff 0x0"
-			Left = "Solid #ffffff 0x0"
-			Right = "Solid #ffffff 0x0"
-			BottomLeft = "Solid #ffffff 0x0"
-			Bottom = "Solid #ffffff 0x0"
-			BottomRight = "Solid #ffffff 0x0"
-		}
-
-		Unfocused {
-			TopLeft = "Solid #ffffff 0x0"
-			Top = "Solid #ffffff 0x0"
-			TopRight = "Solid #ffffff 0x0"
-			Left = "Solid #ffffff 0x0"
-			Right = "Solid #ffffff 0x0"
-			BottomLeft = "Solid #ffffff 0x0"
-			Bottom = "Solid #ffffff 0x0"
-			BottomRight = "Solid #ffffff 0x0"
-		}
-	}
-}
-
-Define = "Empty" {
-	Focused = "Empty"
-	Unfocused = "Empty"
-
-	Separator {
-		Focused = "Empty"
-		Unfocused = "Empty"
-	}
-
-	Font {
-		Focused = "Empty"
-	}
-
-	FontColor {
-		Focused = "Empty"
-		FocusedSelected = "Empty"
-		Unfocused = "Empty"
-		UnfocusedSelected = "Empty"
-	}
-
-	Tab {
-		Focused = "Empty"
-		FocusedSelected = "Empty"
-		Unfocused = "Empty"
-		UnfocusedSelected = "Empty"
-	}
-
-	Border {
-		Focused {
-			TopLeft = "Empty"
-			Top = "Empty"
-			TopRight = "Empty"
-			Left = "Empty"
-			Right = "Empty"
-			BottomLeft = "Empty"
-			Bottom = "Empty"
-			BottomRight = "Empty"
-		}
-
-		Unfocused {
-			TopLeft = "Empty"
-			Top = "Empty"
-			TopRight = "Empty"
-			Left = "Empty"
-			Right = "Empty"
-			BottomLeft = "Empty"
-			Bottom = "Empty"
-			BottomRight = "Empty"
-		}
-	}
+	HeightAdapt = "False"
 }
 
 Harbour {
@@ -173,28 +110,28 @@ Menu {
 
 	Focused {
 		Font = "$FONT"
-		Background = "Solid #ffffff"
-    	Item	= "Empty"
+        Background = "Empty"
+    	Item = "Solid #ffffff"
 		Text = "#222222" 
-		Separator = "Solid #222222 1x1#scaled"
-        Arrow = "Solid #222222 4x4#scaled"
+		Separator = "Solid #222222 1x1"
+        Arrow = "Solid #222222 4x4"
   	}
 
   	Unfocused {
     	Font = "$FONT"
-        Background = "Solid #ffffff"
-    	Item = "Empty"
+        Background = "Empty"
+    	Item = "Solid #ffffff"
 		Text = "#222222"
-		Separator = "Solid #222222 1x1#scaled"
-        Arrow = "Solid #222222 4x4#scaled"
+		Separator = "Solid #222222 1x1"
+        Arrow = "Solid #222222 4x4"
   	}
 
   	Selected {
 		Font = "$FONT"
-		Background = "Solid #9dbc8e"
-		Item	= "Empty"
+		Background = "Empty"
+		Item	= "Solid #9dbc8e"
 		Text = "#ffffff"
-		Arrow = "Solid #222222 4x4#scaled"
+		Arrow = "Solid #222222 4x4"
   	}
 }
 
@@ -220,42 +157,4 @@ WorkspaceIndicator {
 	Text = "#222222"
 	EdgePadding = "0"
 	WorkspacePadding = "0"
-}
-
-PDecor {
-	Decor = "Default" {
-		Title {
-			@Base
-		}
-	}
-
-	Decor = "Menu" {
-		Title {
-			@Menu
-		}
-	}
-
-	Decor = "Titlebarless" {
-		Title {
-			@Empty
-		}
-	}
-
-	Decor = "CmdDialog" {
-		Title {
-			@Empty
-		}
-	}
-
-	Decor = "Statuswindow" {
-		Title {
-			@Empty
-		}
-	}
-
-	Decor = "WorkspaceIndicator" {
-		Title {
-			@Empty
-		}
-	}
 }
