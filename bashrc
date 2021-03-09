@@ -12,9 +12,10 @@ source $HOME/.config/bash/completion/partial-path
 # shell
 PS1="\e]0;\W\a\e[0m\n \[$(tput setaf 6)\]\w \$ \[$(tput sgr0)\]"
 
+shopt -s autocd
 shopt -s checkwinsize
 shopt -s histappend
-shopt -s autocd
+shopt -s histverify
 shopt -s extglob
 
 # Fix del in st
