@@ -5,7 +5,7 @@ MOZ_USE_OMTC=1
 MOZ_PLUGIN_PATH="$HOME/.mozilla/plugins"
 
 case $1 in
-        -que) /usr/bin/palemoon "https://duckduckgo.com/html?q=$(echo | dmenu $@)" ;;
+        -que) /usr/bin/palemoon "https://duckduckgo.com/html?q=$(echo | dmenu $@)" & ;;
         -zap) pidof -s palemoon && killall -9 palemoon ;;
 	# Profiles
 	-work) wmctrl -FR "work - Palemoon" && exit \
