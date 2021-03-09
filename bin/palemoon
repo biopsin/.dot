@@ -5,17 +5,15 @@ MOZ_USE_OMTC=1
 MOZ_PLUGIN_PATH="$HOME/.mozilla/plugins"
 
 case $1 in
+        -que) /usr/bin/palemoon "https://duckduckgo.com/html?q=$(echo | dmenu $@)" ;;
+        -zap) pidof -s palemoon && killall -9 palemoon ;;
 	# Profiles
-    -work) wmctrl -FR "work - Palemoon" && exit 0
-		echo "Loading work profile"; /usr/bin/palemoon --no-remote -P work & ;;
-    -bank) wmctrl -FR "bank - Palemoon" && exit 0
-		echo "Loading bank profile"; /usr/bin/palemoon --no-remote -P bank & ;;
-    -test) wmctrl -FR "test - Palemoon" && exit 0
-		echo "Loading test profile"; /usr/bin/palemoon --no-remote -P test & ;;
-    *) wmctrl -FR "userx - Palemoon" && exit 0
-		echo "Loading userx profile"; /usr/bin/palemoon & ;;
-	# Options
-	-que) qy=$(echo | dmenu $@)
-		/usr/bin/palemoon https://duckduckgo.com/html?q="$qy" ;;
-    -zap) pidof -s palemoon && killall -9 palemoon ;;
+	-work) wmctrl -FR "work - Palemoon" && exit \
+		|| echo "Loading work profile" && /usr/bin/palemoon --no-remote -P work & ;;
+	-bank) wmctrl -FR "bank - Palemoon" && exit \
+		|| echo "Loading bank profile" && /usr/bin/palemoon --no-remote -P bank & ;;
+	-test) wmctrl -FR "test - Palemoon" && exit \
+		|| echo "Loading test profile" && /usr/bin/palemoon --no-remote -P test & ;;
+	*) wmctrl -FR "userx - Palemoon" && exit \
+		|| echo "Loading userx profile" && /usr/bin/palemoon & ;;
 esac
