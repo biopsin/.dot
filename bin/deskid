@@ -1,3 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 # show desktop id
-notify-send -r 4253 "Desktop		$(wmctrl -j)" -u low -t 2000 > /dev/null
+dnr="$(($(wmctrl -j) + 1))"
+dunstify -r 4253 "☐ Desktop        $dnr" -u low -t 2000 > /dev/null
