@@ -3,42 +3,41 @@
 INCLUDE = "vars"
 
 Client {
-	#Enter = "Any Any" { Actions = "Focus" }
-	ButtonPress = "1" { Actions = "HideAllMenus; Focus; Raise" }
-	ButtonPress = "3" { Actions = "HideAllMenus" }
-	ButtonPress = "4" { Actions = "Focus; Raise" }
-	ButtonPress = "5" { Actions = "Focus; Raise" }
-	ButtonRelease = "Mod4 1" { Actions = "Lower; UnFocus" }
-	ButtonRelease = "Mod4 2" { Actions = "Exec $LOCAL/skippy" }
-	ButtonRelease = "Mod4 3" { Actions = "HideAllMenus; ShowMenu Window" }
-	ButtonPress = "Mod4 4" { Actions = "SendToWorkspace PrevV; Exec $DESKID; GotoWorkspace PrevV" }
-	ButtonPress = "Mod4 5" { Actions = "SendToWorkspace NextV; Exec $DESKID; GotoWorkspace NextV" }
-	Motion = "Mod4 1" { Threshold = "5"; Actions = "Move" }
-	Motion = "Mod4 3" { Threshold = "5"; Actions = "Resize" }
+    Enter = "Mod4 Any" { Actions = "Focus" }
+    ButtonPress = "1" { Actions = "HideAllMenus; Focus; Raise" }
+    ButtonPress = "3" { Actions = "HideAllMenus" }
+    ButtonRelease = "Mod4 1" { Actions = "Lower; UnFocus" }
+    ButtonRelease = "Mod4 2" { Actions = "Exec $LOCAL/skippy" }
+    ButtonRelease = "Mod4 3" { Actions = "HideAllMenus; ShowMenu Window" }
+    ButtonPress = "Mod4 4" { Actions = "SendToWorkspace PrevV; Exec $DESKID; GotoWorkspace PrevV" }
+    ButtonPress = "Mod4 5" { Actions = "SendToWorkspace NextV; Exec $DESKID; GotoWorkspace NextV" }
+    Motion = "Mod4 1" { Threshold = "5"; Actions = "Move" }
+    Motion = "Mod4 3" { Threshold = "5"; Actions = "Resize" }
 }
 
 Root {
-	ButtonPress = "1" { Actions = "HideAllMenus" }
-	ButtonRelease = "2" { Actions = "Exec $LOCAL/skippy" }
-	ButtonRelease = "3" { Actions = "HideAllMenus; ShowMenu Root" }
-	ButtonPress = "4" { Actions = "Exec $DESKID; GoToWorkspace PrevV" }
-	ButtonPress = "5" { Actions = "Exec $DESKID; GoToWorkspace NextV" }
+    ButtonPress = "1" { Actions = "HideAllMenus" }
+    ButtonRelease = "2" { Actions = "Exec $LOCAL/skippy" }
+    ButtonRelease = "3" { Actions = "HideAllMenus; ShowMenu Root" }
+    ButtonPress = "4" { Actions = "Exec $DESKID; GoToWorkspace PrevV" }
+    ButtonPress = "5" { Actions = "Exec $DESKID; GoToWorkspace NextV" }
 }
 
 Menu {
-	Enter = "Any Any" { Actions = "Focus" }
+    Enter = "Any Any" { Actions = "Focus" }
 }
 
-#ScreenEdge {
-#	Left {
-#		EnterMoving = "Any Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,10,10,1905,2140" }
-#	}
-#	Right {
-#		EnterMoving = "Any Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,1925,10,1905,2140" }
-#	}
-#}
+ScreenEdge {
+    Left {
+        EnterMoving = "Mod4 Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,10,10,1905,2140" }
+    }
+    Right {
+        EnterMoving = "Mod4 Any" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,1925,10,1905,2140" }
+    }
+}
 
 Other {
-	Enter = "Any Any" { Actions = "Focus" }
-	Motion = "1" { Actions = "Focus; Raise; Move" }
+    Enter = "Any Any" { Actions = "Focus" }
+    ButtonRelease = "3" { Actions = "Close" }
 }
+
