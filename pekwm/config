@@ -21,6 +21,8 @@ MoveResize {
 }
 
 Screen {
+    ThemeBackground = "False"
+
     Workspaces = "2"
     WorkspacesPerRow = "1"
     WorkspaceNames = "01;02"
@@ -31,7 +33,7 @@ Screen {
     ShowWorkspaceIndicator = "0"
     PlaceNew = "True"
     FocusNew = "True"
-	FocusStealProtect = "1"
+    FocusStealProtect = "0"
 
     ReportAllClients = "False"
 
@@ -42,8 +44,9 @@ Screen {
     HonourAspectRatio = "False"
     EdgeSize = "10 10 10 10"
     EdgeIndent = "True"
-    PixmapCacheSize = "0"
     DoubleClickTime = "250"
+
+    CurrHeadSelector = "Cursor"
 
     Placement {
         Model = "MouseCentered"
