@@ -35,8 +35,8 @@ Global {
 	KeyPress = "Mod4 F2" { Actions = "Exec $DESKID; GotoWorkspace 2" }
 
 # Send window to desktop
-	KeyPress = "Mod4 Up" { Actions = "SendToWorkspace PrevV; Exec $DESKID; GoToWorkspace PrevV" }
-	KeyPress = "Mod4 Down" { Actions = "SendToWorkspace NextV; Exec $DESKID; GoToWorkspace NextV" }
+	KeyPress = "Mod4 Up" { Actions = "SendToWorkspace PrevV KeepFocus; Exec $DESKID; GoToWorkspace PrevV" }
+	KeyPress = "Mod4 Down" { Actions = "SendToWorkspace NextV KeepFocus; Exec $DESKID; GoToWorkspace NextV" }
 
 # Save and restore window position
 	KeyPress = "Mod4 Scroll_Lock" { Actions = "Exec $LOCAL/wingp -s" }
