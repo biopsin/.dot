@@ -8,7 +8,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # General
-alias startx='startx -- :0 vt3'
 alias xx='exit'
 alias ..='cd ..'
 alias more='less'
@@ -45,6 +44,8 @@ alias rindex-remove='xbps-rindex -r .'
 alias vkpurge-clean='/usr/bin/doas vkpurge rm all'
 
 # System
+alias startx='startx -- :0 vt3'
+
 alias top="top -U userx"
 alias df='df -H'
 alias du='du -sh'
