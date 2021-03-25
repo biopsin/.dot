@@ -1,23 +1,25 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
 
 wgf=/tmp/win.geo
 # Windows geometry save/restore
 case $1 in
-    -s)
-		# set cache file
-		[ -f "$wgf" ] || touch "$wgf"
-		# Save all windows
-		wmctrl -lGWS ' ' > $wgf
-		notify-send -a info "Geometry    saved" -u normal -t 5000
-		;;
-    -r)
-		# Restore all windows
-		while read -a arr; do
-			wmctrl -ia ${arr[0]} -e ${arr[1]},${arr[2]},${arr[3]},${arr[4]},${arr[5]}
-		done < $wgf
-		;;
-    * )
-		printf "Usage: wingp [option]\n\
-	'-s' save windows geometry and position\n\
-	'-r' restore geometry and position" ;;
+    -s) # set cache file
+        [ -f "$wgf" ] || touch "$wgf"
+        # Save all windows
+        wmctrl -lGWS ' ' > $wgf
+        dunstify -a info "Windows" "\nGeometry saved" -u normal -t 5000
+        ;;
+
+    -r) # Restore all windows
+        [ ! -f "$wgf" ] && dunstify "Windows" "\nGeometry not set" -u critical -t 5000 && exit
+
+        while read -a arr; do
+            wmctrl -ia ${arr[0]} -e ${arr[1]},${arr[2]},${arr[3]},${arr[4]},${arr[5]}
+        done < $wgf
+        ;;
+
+    * ) printf "Usage: wingp [option]\n\
+    '-s' save windows geometry and position\n\
+    '-r' restore geometry and position" ;;
 esac
+
