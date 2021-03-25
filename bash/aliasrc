@@ -25,7 +25,7 @@ alias top="top -U userx"
 
 alias aria-dl='aria2c --conf-path=$HOME/.config/aria2/aria2c.conf'
 alias yta='youtube-dl --config-location $HOME/.config/youtube-dl/audio.conf'
-alias ytv='youtube-dl --config-location $HOME/.config/youtube-dl/audio.conf'
+alias ytv='youtube-dl --config-location $HOME/.config/youtube-dl/video.conf'
 
 # Container
 alias c-user='contain -n -u 1000:1000:1 -g 1000:1000:1 /media/workr/void-contain/ /bin/bash'
