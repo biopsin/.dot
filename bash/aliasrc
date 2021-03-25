@@ -11,21 +11,16 @@ fi
 alias startx='startx -- :0 vt3'
 alias xx='exit'
 alias ..='cd ..'
-alias gh='history | grep -i $1'
+alias more='less'
 alias catn='cat -n'
 alias nano="nano -l"
-alias df='df -H'
-alias du='du -sh'
-alias free='free -h && ps -e -orss=,%mem,args= | sort -nr | head'
-alias pstree='pstree -l'
-alias ping='ping -4 -c 5'
-alias xp='xprop | egrep -w "WM_CLASS|WM_NAME|WM_WINDOW_ROLE"'
+alias gh='history | grep -i $1'
 alias colr="sed 's/^-/\x1b[41m-/;s/^+/\x1b[42m+/;s/^@/\x1b[34m@/;s/$/\x1b[0m/'"
-alias top="top -U userx"
+alias xp='xprop | egrep -w "WM_CLASS|WM_NAME|WM_WINDOW_ROLE"'
 
-alias aria-dl='aria2c --conf-path=$HOME/.config/aria2/aria2c.conf'
+alias aria-dl='aria2c --conf-path $HOME/.config/aria2/aria2c.conf'
 alias yta='youtube-dl --config-location $HOME/.config/youtube-dl/audio.conf'
-alias ytv='youtube-dl --config-location $HOME/.config/youtube-dl/video.conf'
+alias ytv='youtube-dl --config-location $HOME/.config/youtube-dl/audio.conf'
 
 # Container
 alias c-user='contain -n -u 1000:1000:1 -g 1000:1000:1 /media/workr/void-contain/ /bin/bash'
@@ -50,9 +45,16 @@ alias rindex-remove='xbps-rindex -r .'
 alias vkpurge-clean='/usr/bin/doas vkpurge rm all'
 
 # System
-alias more='less'
+alias top="top -U userx"
+alias df='df -H'
+alias du='du -sh'
+alias pstree='pstree -l'
+alias free='free -h && ps -e -orss=,%mem,args= | sort -nr | head'
+alias ping='ping -4 -c 5'
+
 alias updb='doas mupdatedb'
 alias vcsdump='doas fold /dev/vcs1'
-alias dmesg-last='doas dmesg --color | tail -n 100'
+alias dmesg-last='doas dmesg | tail -n 50'
 alias dmesg-error='doas dmesg | egrep -i --color "error|critical|failed"'
 alias rebooot='/usr/bin/doas reboot'
+
