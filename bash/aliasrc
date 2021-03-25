@@ -22,7 +22,10 @@ alias ping='ping -4 -c 5'
 alias xp='xprop | egrep -w "WM_CLASS|WM_NAME|WM_WINDOW_ROLE"'
 alias colr="sed 's/^-/\x1b[41m-/;s/^+/\x1b[42m+/;s/^@/\x1b[34m@/;s/$/\x1b[0m/'"
 alias top="top -U userx"
+
 alias aria-dl='aria2c --conf-path=$HOME/.config/aria2/aria2c.conf'
+alias yta='youtube-dl --config-location $HOME/.config/youtube-dl/audio.conf'
+alias ytv='youtube-dl --config-location $HOME/.config/youtube-dl/audio.conf'
 
 # Container
 alias c-user='contain -n -u 1000:1000:1 -g 1000:1000:1 /media/workr/void-contain/ /bin/bash'
