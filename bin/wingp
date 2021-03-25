@@ -3,9 +3,7 @@
 wgf=/tmp/win.geo
 # Windows geometry save/restore
 case $1 in
-    -s) # set cache file
-        [ -f "$wgf" ] || touch "$wgf"
-        # Save all windows
+    -s) # Save all windows
         wmctrl -lGWS ' ' > $wgf
         dunstify -a info "Windows" "\nGeometry saved" -u normal -t 5000
         ;;
