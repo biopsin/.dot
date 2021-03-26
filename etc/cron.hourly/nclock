@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/sh
 
 clk=$(date +%H:%M)
 dat=$(date +"%A  %d\n%B   %m\nWeek  %V\n\nDay of year  %j")
 
-dunstify -r 213 "Time  $clk" "\n<a href=\"https://time.is/no/Oslo\"></a>$dat" -t 30000 -u low;
+dunstify -r 213 "Time  $clk" "<a href=\"https://time.is/no/Oslo\"></a>\n$dat" -t 30000 -u low;
