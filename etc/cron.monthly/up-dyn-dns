@@ -2,6 +2,6 @@
 
 /usr/bin/curl -k -s http://freedns.afraid.org/dynamic/update.php?S0ZuZnpCTVpvWTJWclgybG5DcHI6NzU0OTg0MQ== |
  sed 's/^ERROR: Address //' |
- while read out; do
-	dunstify -a info "Freedns" "\n<a href=\"https://freedns.afraid.org\"></a>$out" -t 60000
+ while read dns; do
+	dunstify -a info "Freedns" "<a href=\"https://freedns.afraid.org\"></a>\n$dns" -t 60000
 done
