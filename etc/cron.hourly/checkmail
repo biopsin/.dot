@@ -1,40 +1,38 @@
-#!/bin/bash
+#!/usr/bin/sh
 
 creds="$HOME/.config/creds"
-
 tmap="imaps://mail.teknik.io"
 tek="https://mail.teknik.io"
-
 pmap="imaps://cpanel14.proisp.no"
 pro="https://cpanel14.proisp.no:2096"
 
 # Teknik
 unread="$(curl -s --netrc-file $creds/tek1rc $tmap -X 'STATUS INBOX (UNSEEN)' | grep -Eo '[0-9]{1,4}')"
 [[ $unread = 1 ]] &&
- dunstify "✉ Teknik" "\n<a href=\"$tek\"></a>1 new mail" -t 90000 ||
- dunstify "✉ Teknik" "\n<a href=\"$tek\"></a>$unread new mails" -t 90000
+ dunstify "✉ Teknik" "<a href=\"$tek\"></a>\n1 new mail" -t 90000 ||
+ dunstify "✉ Teknik" "<a href=\"$tek\"></a>\n$unread new mails" -t 90000
 
 # Pro Biopsin
 unread="$(curl -s --netrc-file $creds/isp4rc $pmap -X 'STATUS INBOX (UNSEEN)' | grep -Eo '[0-9]{1,4}')"
 [[ $unread = 1 ]] &&
- dunstify "✉ Biopsin" "\n<a href=\"$pro\"></a>1 new mail" -t 90000 ||
- dunstify "✉ Biopsin" "\n<a href=\"$pro\"></a>$unread new mails" -t 90000
+ dunstify "✉ Biopsin" "<a href=\"$pro\"></a>\n1 new mail" -t 90000 ||
+ dunstify "✉ Biopsin" "<a href=\"$pro\"></a>\n$unread new mails" -t 90000
  
 # Pro Post
 unread="$(curl -s --netrc-file $creds/isp1rc $pmap -X 'STATUS INBOX (UNSEEN)' | grep -Eo '[0-9]{1,4}')"
 [[ $unread = 1 ]] &&
- dunstify "✉ Post" "\n<a href=\"$pro\"></a>1 new mail" -t 90000 ||
- dunstify "✉ Post" "\n<a href=\"$pro\"></a>$unread new mails" -t 90000
+ dunstify "✉ Post" "<a href=\"$pro\"></a>\n1 new mail" -t 90000 ||
+ dunstify "✉ Post" "<a href=\"$pro\"></a>\n$unread new mails" -t 90000
 
 # Pro Petter
 unread="$(curl -s --netrc-file $creds/isp2rc $pmap -X 'STATUS INBOX (UNSEEN)' | grep -Eo '[0-9]{1,4}')"
 [[ $unread = 1 ]] &&
- dunstify "✉ Petter" "\n<a href=\"$pro\"></a>1 new mail" -t 90000 ||
- dunstify "✉ Petter" "\n<a href=\"$pro\"></a>$unread new mails" -t 90000
+ dunstify "✉ Petter" "<a href=\"$pro\"></a>\n1 new mail" -t 90000 ||
+ dunstify "✉ Petter" "<a href=\"$pro\"></a>\n$unread new mails" -t 90000
 
 # Pro Janusz
 #unread="$(curl -s --netrc-file $creds/isp3rc $pmap -X 'STATUS INBOX (UNSEEN)' | grep -Eo '[0-9]{1,4}')"
 #[[ $unread = 1 ]] &&
-# dunstify "Janusz" "\n<a href=\"$pro\"></a>1 new mail" -t 90000 ||
-#	dunstify "Janusz" "\n<a href=\"$pro\"></a>$unread new mails" -t 90000
+# dunstify "Janusz" "<a href=\"$pro\"></a>\n1 new mail" -t 90000 ||
+#	dunstify "Janusz" "<a href=\"$pro\"></a>\n$unread new mails" -t 90000
  
