@@ -1,8 +1,17 @@
 #!/usr/bin/sh
-# Simple time syncer
+# Simple time sync
 
-# Pull the data from someone
-date +"%d %b %Y %T %Z" -s "$(curl -s --head https://yr.no | grep '^Date:' | cut -d' ' -f 3-)"
+# A site
+is=yr.no
+
+# Check network is UP
+while ! ping -c1 -n $is 2> /dev/null; do sleep 10; done
+
+# Pull a site timestamp
+date +"%d %b %Y %T %Z" -s "$(curl -s --head $is | grep '^Date:' | cut -d' ' -f 3-)"
 
 # Sync sys to hw clock
 hwclock --systohc --update-drift --utc
+
+# Print to tty1
+echo "localtime synced"
