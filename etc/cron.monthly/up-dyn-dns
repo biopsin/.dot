@@ -1,7 +1,9 @@
 #!/usr/bin/sh
 
-/usr/bin/curl -k -s freedns.afraid.org/dynamic/update.php?S0ZuZnpCTVpvWTJWclgybG5DcHI6NzU0OTg0MQ== |
- sed 's/^ERROR: Address //' |
+token="$(cat $HOME/.config/creds/freedns)"
+
+# Sync FreeDNS
+/usr/bin/curl -k -s "$token" | sed 's/^ERROR: Address //' |
  while read dns; do
-	dunstify -a info "Freedns" "<a href=\"https://freedns.afraid.org\"></a>\n$dns" -t 60000
+    dunstify -a info2 "⤒ Freedns" "<a href=\"https://freedns.afraid.org\"></a>\n$dns" -t 60000
 done
