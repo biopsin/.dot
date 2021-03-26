@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 
 /usr/bin/curl -k -s http://freedns.afraid.org/dynamic/update.php?S0ZuZnpCTVpvWTJWclgybG5DcHI6NzU0OTg0MQ== |
  sed 's/^ERROR: Address //' |
