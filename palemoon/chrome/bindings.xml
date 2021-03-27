@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bindings>
+<bindings xmlns="http://www.mozilla.org/xbl">
+    <binding id="tabs-scroll">
+        <handlers>
+            <handler event="wheel"><![CDATA[
+                // Preserve original behaviour if meta (Windows) key is held
+                if (event.metaKey) return;
+                                
+                if (event.deltaY < 0) {
+                    gBrowser.tabContainer.advanceSelectedTab(-1, true);
+                }
+                else {
+                    gBrowser.tabContainer.advanceSelectedTab(1, true);
+                }    
+                event.stopPropagation();
+                event.preventDefault();
+            ]]></handler>
+        </handlers>
+    </binding>
+
+    <binding id="dbl-tab">
+        <implementation>
+            <constructor><![CDATA[
+                if(window.userChromeJsMod) return;
+                window.userChromeJsMod = true;
+                
+                var chromeFiles = FileUtils.getDir("UChrm", []).directoryEntries;
+                var xulFiles = [];
+                var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
+                
+                while(chromeFiles.hasMoreElements()) {
+                    var file = chromeFiles.getNext().QueryInterface(Ci.nsIFile);
+                    var fileURI = Services.io.newFileURI(file);
+                    
+                    if(file.isFile()) {
+                        if(/(^userChrome|\.uc)\.js$/i.test(file.leafName)) {
+                            Services.scriptloader.loadSubScriptWithOptions(fileURI.spec, {target: window, ignoreCache: true});
+                        }
+                        else if(/(^userChrome|\.uc)\.xul$/i.test(file.leafName)) {
+                            xulFiles.push(fileURI.spec);
+                        }
+                        else if(/\.as\.css$/i.test(file.leafName)) {
+                            if(!sss.sheetRegistered(fileURI, sss.AGENT_SHEET))
+                                sss.loadAndRegisterSheet(fileURI, sss.AGENT_SHEET);
+                        }
+                        else if(/^(?!(userChrome|userContent)\.css$).+\.css$/i.test(file.leafName)) {
+                            if(!sss.sheetRegistered(fileURI, sss.USER_SHEET))
+                                sss.loadAndRegisterSheet(fileURI, sss.USER_SHEET);
+                        }
+                    }
+                }
+                
+                setTimeout(function loadXUL() {
+                    if(xulFiles.length > 0) {
+                        document.loadOverlay(xulFiles.shift(), null);
+                        setTimeout(loadXUL, 5);
+                    }
+                }, 0);
+            ]]></constructor>
+        </implementation>
+    </binding>
+</bindings>

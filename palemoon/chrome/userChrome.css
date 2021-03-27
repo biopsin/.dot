@@ -1,0 +1,203 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* Hide min, max, close in title bar */
+#titlebar-min, #titlebar-max, #titlebar-close { display: none !important; }
+/* Hide minimize, restore, close in fullscreen */
+#minimize-button, #restore-button, #close-button { display: none !important; }
+
+/* Remove menus */
+menuitem[label="New Private Window"],
+menuitem[label="New Tab"],
+menuitem[label="New Window"],
+menuitem[label="Full Screen"],
+/*  Remove menu icons*/
+.menu-iconic-icon { display: none !important; }
+
+/* Remove Bookmark items */
+#bookmarksShowAll, #organizeBookmarksSeparator, #bookmarksToolbarFolderMenu, #bookmarksToolbarSeparator, 
+#bookmarksMenuItemsSeparator, #bookmarksMenuPopup > .hide-if-empty-places-result, #menu_unsortedBookmarks,  menuitem[id="menu_bookmarkThisPage"], menuitem[id="subscribeToPageMenuitem"] { display: none !important; }
+
+menu[container="true"]>menupopup[placespopup="true"]>menuseparator[class="bookmarks-actions-menuseparator"]:nth-last-child(2),
+menu[container="true"]>menupopup[placespopup="true"]>menuitem[class="openintabs-menuitem"]:last-child 
+{ visibility:collapse !important; }
+
+/* Remove History items */
+menuitem[label="Restore All Tabs"], #historyRestoreLastSession { display:none !important; }
+
+/* Fix white text on selected menubar item */
+menubar > menu[open] { color: #ffffff !important; }
+
+
+/* --- URL bar --- */
+#urlbar {
+	-moz-appearance: none !important;
+	background: white !important;
+	margin-top: 0px !important;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+	margin-bottom: 0px !important;
+	height: 26px !important;
+	box-shadow: none !important;
+}
+
+
+/* TABS USER PROFILE */
+#TabsToolbar {
+	background: none !important;
+	margin-top: -1px !important;
+	margin-bottom: 0px !important;
+	height: 26px !important;
+}
+
+.tabbrowser-tabs *|tab {
+	font-size: 13px !important;
+	border: 0 !important;
+	padding-left: 8px !important;
+	padding-right: 8px !important;
+	margin-top: -8px !important;
+	margin-bottom: -8px !important;
+}
+
+.tabbrowser-tab[selected="true"] {
+	background: #FFFFFF !important;
+	color: #2e3436 !important;
+}
+
+.tabbrowser-tab:not([selected="true"]) {
+	background: #f1f1f1 !important;
+	color: grey !important;
+}
+
+.tabbrowser-tabs[positionpinnedtabs] > .tabbrowser-tab[pinned] {
+	background: none !important;
+	margin-top: 0px !important;
+	padding-top: 4px !important;
+}
+
+/* Color private mode tabs toolbar */
+#main-window[privatebrowsingmode="temporary"] #TabsToolbar {
+	-moz-appearance: none !important;
+	background: #E0C3EA !important;
+}
+
+/* Disable volume icon pinned tab */
+.tabbrowser-tab[pinned] .tab-icon-overlay { display: none !important; }
+
+/* Removes Items and seperators from Tab Context Menu */
+#context_reloadAllTabs, #context_bookmarkAllTabs, #context_closeTabsToTheEnd, #context_closeOtherTabs, 
+menuitem[label="Undo Other Tabs"] + menuseparator, #context_closeOtherTabs+menuseparator,
+#context_undoCloseTab, menuitem[label="Close Tab"] + menuseparator, #context_closeTab+menuseparator
+{ display: none !important; }
+
+/* Moves Items on Tab Context Menu */
+#context_closeTab { -moz-box-ordinal-group: 0 !important; }
+
+/* Scrollwheel tabswitcher */
+.tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
+    /* Load bindings.xml from same folder as userChrome.css */
+	-moz-binding: url("bindings.xml#tabs-scroll") !important;
+}
+
+/* New tab button */
+.tabs-newtab-button {
+	background: none !important;
+	border: 0 !important;
+	margin-left: 0px !important;
+	width: 32px !important;
+	opacity: 0.5 !important;
+}
+
+/* New tab button hover */
+.tabs-newtab-button:hover { opacity: 1 !important; }
+
+/* Duplicate tab */
+#alltabs-button { -moz-binding: url("bindings.xml#dbl-tab") !important; }
+
+
+/* --- Auto expand sidebar --- */
+/* Hide search icon in sidepanel */
+#search-box .textbox-search-icon {
+	list-style-image: none !important;
+	height: 26px !important;
+}
+
+:root { --sidebar-hover-width: 5px; --sidebar-visible-width: 640px; }
+
+#sidebar-box {
+	position: relative !important;
+	overflow-x: hidden !important;
+	margin-right: calc(var(--sidebar-hover-width) * -1) !important;
+	left: var(--sidebar-hover-width) !important;
+	min-width: var(--sidebar-hover-width) !important;
+	max-width: var(--sidebar-hover-width) !important;
+}
+
+#sidebar-box:hover {
+	margin-right: calc(var(--sidebar-visible-width) * -1) !important;
+	left: var(--sidebar-visible-width) !important;
+	min-width: var(--sidebar-visible-width) !important;
+	max-width: var(--sidebar-visible-width) !important;
+}
+
+#sidebar {
+	min-width:0px !important;
+	max-width:none !important;
+	opacity: 0 !important;
+}
+
+#sidebar:hover { opacity: 1 !important; }
+
+/* sidebar-header and label are hidden */
+#sidebar-header, #sidebar-search-label { display: none !important; }
+
+/* sidebar-splitter styles the divider between the sidebar and the rest of the browser. */
+#sidebar-splitter {}
+
+/* Increase sidebar font */
+.sidebar-placesTreechildren::-moz-tree-cell-text { font-size: 12pt !important; }
+.sidebar-placesTreechildren::-moz-tree-row { height: 23px !important; }
+
+
+/* Increase library font */
+window[windowtype="Places:Organizer"] treechildren::-moz-tree-cell-text { font-size: 16px !important; }
+window[windowtype="Places:Organizer"] treechildren::-moz-tree-row { height: 26px !important; }
+
+
+/* FindToolbar top position*/
+#FindToolbar {
+	transition: 0ms !important;
+	position: fixed !important;
+	top: 22px !important;
+	height: 34px !important;
+	background: #F1F1F1 !important;
+	border-top: none !important;
+	box-shadow: none !important;
+}
+
+/* FindToolbar buttons */
+toolbarbutton.findbar-find-previous, toolbarbutton.findbar-find-previous label { display: none !important; }
+toolbarbutton.findbar-find-next, toolbarbutton.findbar-find-next label { display: none !important; }
+toolbarbutton.findbar-highlight, toolbarbutton.findbar-highlight label {  font-size: 0px !important; }
+
+.findbar-container .findbar-textbox {
+	border: 0px !important;
+	width: 450px !important;
+}
+
+.found-matches {
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+}
+
+.findbar-find-status, .find-status-icon { display: none !important; }
+
+
+/* Statusbar/pop-up Overlay */
+statuspanel[type="overLink"] .statuspanel-label {
+	background: white !important;
+    border-color: white !important;
+	border-width: 5 5px 5px 5 !important;
+	/*margin-left: 5px !important;
+	margin-bottom: 5px !important;*/
+	font-size: 18px !important;
+}

@@ -1,0 +1,7 @@
+@-moz-document url-prefix(about:blank), url-prefix(about:newtab);
+
+/* custom add-ons page header */
+#header-search { display: none !important;}
+toolbarbutton#back-btn.nav-button.header-button { display: none !important;}
+toolbarbutton#forward-btn.nav-button.header-button { display: none !important;}
+toolbarbutton#header-utils-btn.header-button { height: 26px !important;}
