@@ -30,14 +30,20 @@ Property = "abiword,Abiword,topLevelWindow" {
 	ClientGeometry = "1334x1785+1252+186"
 }
 
+Property = "(scite|SciTE),(Scite|SciTE)" {
+ 	ApplyOn = "New"
+	ClientGeometry = "1360x1720"
+}
+
 Property = "epdfview,Epdfview" {
  	ApplyOn = "New"
 	ClientGeometry = "1270x1800"
 }
 
 Property = "osmo,Osmo" {
+	Title = "Osmo.*"
  	ApplyOn = "New"
-	ClientGeometry = "420x520-10-10"
+	ClientGeometry = "467x512-10-10"
 }
 
 Property = "viewnior,Viewnior" {
@@ -46,13 +52,19 @@ Property = "viewnior,Viewnior" {
 }
 
 Property = "nufraw-gimp,Gimp-2.10" {
-	Title = ".* nUFRaw"
+	Title = ".*nUFRaw"
+ 	ApplyOn = "new"
+	ClientGeometry = "1600x1280+1120+440"
+}
+
+Property = "solvespace,Solvespace" {
+	Title = "SolveSpace.*"
  	ApplyOn = "new"
 	ClientGeometry = "1600x1280+1120+440"
 }
 
 Property = "sweep,Sweep" {
-	Title = ".* Sweep 0.9.3"
+	Title = ".*Sweep 0.9.3"
  	ApplyOn = "new"
 	ClientGeometry = "1920x720+960+540"
 }
