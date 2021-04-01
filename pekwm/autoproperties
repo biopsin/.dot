@@ -3,7 +3,6 @@ Require {
 }
 
 // Start of autoproperties
-
 Property = "(st|256color),(st|256color)" {
 	Title = "(\/usr\/bin\/sudo|\/bin\/bash)"
  	ApplyOn = "New"
@@ -72,7 +71,6 @@ Property = "Navigator,Pale moon,view-source" {
  	ApplyOn = "New"
 	ClientGeometry = "1280x1670+1280+150"
 }
-
 // End of autoproperties
 
 TypeRules {
