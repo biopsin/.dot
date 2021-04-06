@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+# Suspend pc 5min after monitor powers off
+function snore()
+{
+    local IFS
+    [[ -n "${_snore_fd:-}" ]] || exec {_snore_fd}<> <(:)
+    read ${1:+-t "$1"} -u $_snore_fd || :
+}
+
+while snore 300; do
+    [ $(cat /sys/class/drm/card0-HDMI-A-1/enabled) != enabled ] && doas zzz
+done
