@@ -38,8 +38,8 @@ Screen {
     ReportAllClients = "False"
 
     TrimTitle = ""
-    FullscreenAbove = "True"
-    FullscreenDetect = "True"
+    FullscreenAbove = "False"
+    FullscreenDetect = "False"
     HonourRandr = "False"
     HonourAspectRatio = "False"
     EdgeSize = "10 10 10 10"
