@@ -7,6 +7,8 @@ function snore()
     read ${1:+-t "$1"} -u $_snore_fd || :
 }
 
-while snore 300; do
-    [ $(cat /sys/class/drm/card0-HDMI-A-1/enabled) != enabled ] && doas zzz
+tm="  Monitor is Off"
+qm="$(xset -q | grep -iP \^\.*Monitor\.\*\$)"
+while snore 10; do
+    [ "$qm" = "$tm" ] && doas zzz
 done
