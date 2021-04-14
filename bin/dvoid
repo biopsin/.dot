@@ -8,11 +8,12 @@ xall() {
 	  do wmctrl -ic "$i" && sleep 0.5;
 	done
 
-	# End dbus-daemon
-	[ -n $(pidof -s dbus-daemon) ] && killall dbus-daemon
+    # Exit dbus
+    [ -z $(pidof -s dbus-daemon) ] || killall dbus-daemon
+    [ -z $(pidof -s dbus-launch) ] || killall dbus-launch
 
-	# End WM
-	[ -n $(pidof -s pekwm) ] && killall pekwm
+    # Exit WM
+    [ -z $(pidof -s pekwm) ] || killall pekwm
 }
 
 choice=$(printf "1  :  Suspend\n2  :  Exit\n3  :  Reboot\n4  :  Shutdown" | dmenu | cut -d ' ' -f 1)
