@@ -1,0 +1,18 @@
+#!/usr/bin/sh
+
+# Screen controll
+list='1.  Disable  DPMS
+2.  Enable   DPMS
+3.  Max  Brightness'
+
+Chosen=$(printf "$list" | dmenu)
+
+if [ "$Chosen" = '1.  Disable  DPMS' ]; then
+    xset -dpms && dunstify -r 4253 "☐ DPMS 	Disabled" -u critical -t 5000 > /dev/null
+elif [ "$Chosen" = '2.  Enable   DPMS' ]; then
+    xset +dpms && dunstify -r 4253 "☐ DPMS 	Enabled" -u normal -t 5000 > /dev/null
+elif [ "$Chosen" = '3.  Max  Brightness' ]; then
+    xcalib -clear
+else
+    exit 1
+fi
