@@ -3,7 +3,7 @@
 INCLUDE = "vars"
 
 Client {
-    Enter = "Mod4 Any" { Actions = "Focus" }
+    Enter = "Mod4 Any" { Actions = "Focus; Raise" }
     ButtonPress = "1" { Actions = "HideAllMenus; Focus; Raise" }
     ButtonPress = "3" { Actions = "HideAllMenus" }
     ButtonRelease = "Mod4 1" { Actions = "Lower; UnFocus" }
