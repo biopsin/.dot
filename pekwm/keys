@@ -12,7 +12,7 @@ Global {
 	KeyPress = "Print" { Actions = "Exec $LOCAL/dcapture" }
 	#KeyPress = "Mod4 Scroll_Lock" { Actions = "UNDEFINED" }
 	KeyPress = "Mod4 Delete" { Actions = "Exec $LOCAL/dvoid" }
-	KeyPress = "Mod4 space" { Actions = "Exec $LOCAL/drun-hist" }
+	KeyPress = "Mod4 space" { Actions = "Exec $LOCAL/dmenu_hist" }
 
 	KeyPress = "Mod4 A" { Actions = "Exec $LOCAL/dclipmenu" }
 	KeyPress = "Mod4 B" { Actions = "Exec $LOCAL/palemoon" }
