@@ -2,8 +2,7 @@
 
 # Screen controll
 list='1.  Disable  DPMS
-2.  Enable   DPMS
-3.  Max  Brightness'
+2.  Enable   DPMS'
 
 sel=$(printf "$list" | dmenu)
 
@@ -11,8 +10,6 @@ if [ "$sel" = '1.  Disable  DPMS' ]; then
     xset -dpms && dunstify -r 4253 "☐ DPMS 	Disabled" -u critical -t 5000 > /dev/null
 elif [ "$sel" = '2.  Enable   DPMS' ]; then
     xset +dpms && dunstify -r 4253 "☐ DPMS 	Enabled" -u normal -t 5000 > /dev/null
-elif [ "$sel" = '3.  Max  Brightness' ]; then
-    xcalib -clear
 else
-    exit 1
+    exit
 fi
