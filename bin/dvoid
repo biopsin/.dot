@@ -2,21 +2,22 @@
 
 xall() {
     sync
-	# Find all running applications
-	winid=$(wmctrl -l | cut -f1)
-	for i in $winid;
-	  do wmctrl -ic "$i" && sleep 0.5;
-	done
+
+    # Find all running applications and close
+    winid=$(wmctrl -l | cut -f 1)
+    for i in $winid;
+        do wmctrl -ic "$i" && sleep 1;
+    done
 
     # Exit dbus
-    [ -z $(pidof -s dbus-daemon) ] || killall dbus-daemon
     [ -z $(pidof -s dbus-launch) ] || killall dbus-launch
+    [ -z $(pidof -s dbus-daemon) ] || killall dbus-daemon
 
     # Exit WM
     [ -z $(pidof -s pekwm) ] || killall pekwm
 }
 
-choice=$(printf "1  :  Suspend\n2  :  Exit\n3  :  Reboot\n4  :  Shutdown" | dmenu | cut -d ' ' -f 1)
+choice=$(printf "1  :  Suspend\n2  :  Exit wm\n3  :  Reboot\n4  :  Shutdown" | dmenu | cut -d ' ' -f 1)
 case $choice in
     1) sync && doas zzz ;;
     2) xall ;;
