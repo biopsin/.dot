@@ -45,11 +45,11 @@ Global {
 
 # Window placement
 	KeyPress = "Mod4 Return" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,640,220,2560,1600" }
-    KeyPress = "Mod4 1" { Actions = "MoveToEdge TopLeft" }
-    KeyPress = "Mod4 2" { Actions = "MoveToEdge TopRight" }
+	KeyPress = "Mod4 1" { Actions = "MoveToEdge TopLeft" }
+	KeyPress = "Mod4 2" { Actions = "MoveToEdge TopRight" }
 	KeyPress = "Mod4 3" { Actions = "MoveToEdge Center" }
-    KeyPress = "Mod4 4" { Actions = "MoveToEdge BottomLeft" }
-    KeyPress = "Mod4 5" { Actions = "MoveToEdge BottomRight" }
+	KeyPress = "Mod4 4" { Actions = "MoveToEdge BottomLeft" }
+	KeyPress = "Mod4 5" { Actions = "MoveToEdge BottomRight" }
 
 # Window management
 	KeyPress = "Mod4 I" { Actions = "Exec $LOCAL/dowin" }
