@@ -9,10 +9,9 @@ Global {
 	KeyPress = "XF86AudioRaiseVolume" { Actions = "Exec $LOCAL/ninfo -all" }
 	KeyPress = "XF86AudioPrev" { Actions = "Exec $LOCAL/nstats -all" }
 	KeyPress = "XF86AudioPlay" { Actions = "Exec /usr/local/etc/cron.hourly/checkmail" }
-	KeyPress = "Print" { Actions = "Exec $LOCAL/dxcalib" }
-	KeyPress = "Mod4 Print" { Actions = "Exec $LOCAL/dcapture" }
-    KeyPress = "Pause" { Actions = "Exec /$LOCAL/dowin" }
-	KeyPress = "Mod4 Pause" { Actions = "Exec $LOCAL/dvoid" }
+	KeyPress = "Print" { Actions = "Exec $LOCAL/dcapture" }
+	#KeyPress = "Mod4 Scroll_Lock" { Actions = "UNDEFINED" }
+	KeyPress = "Mod4 Delete" { Actions = "Exec $LOCAL/dvoid" }
 	KeyPress = "Mod4 space" { Actions = "Exec $LOCAL/drun-hist" }
 
 	KeyPress = "Mod4 A" { Actions = "Exec $LOCAL/dclipmenu" }
@@ -21,26 +20,28 @@ Global {
 	KeyPress = "Mod4 E" { Actions = "Exec ifrun SciTE" }
 	KeyPress = "Mod4 F" { Actions = "Exec ifrun spacefm" }
 	KeyPress = "Mod4 L" { Actions = "Exec $LOCAL/dsearch" }
+	KeyPress = "Mod4 N" { Actions = "Exec $LOCAL/dmind" }
 	KeyPress = "Mod4 P" { Actions = "Exec ifrun fpm2" }
 	KeyPress = "Mod4 T" { Actions = "Exec $LOCAL/tabbed" }
 	KeyPress = "Mod4 W" { Actions = "Exec $LOCAL/palemoon -que" }
+
+# Screen & dpms
+	KeyPress = "Mod4 F11" { Actions = "Exec $LOCAL/dpmsctl" }
+	KeyPress = "Scroll_Lock" { Actions = "Exec $LOCAL/dxcalib" }
 
 # Dunst control
 	KeyPress = "Ctrl Mod4 Z" { Actions = "Exec dunstctl close-all" }
 	KeyPress = "Ctrl Mod4 H" { Actions = "Exec dunstctl history-pop" }
 	KeyPress = "Ctrl Mod4 space" { Actions = "Exec dunstctl context" }
 
-# Switch desktop
+# Switch workspace
 	KeyPress = "Mod4 F1" { Actions = "Exec $DESKID; GotoWorkspace 1" }
 	KeyPress = "Mod4 F2" { Actions = "Exec $DESKID; GotoWorkspace 2" }
+	KeyPress = "Mod4 F3" { Actions = "Exec $DESKID; GotoWorkspace 3" }
 
-# Send window to desktop
+# Send to workspace
 	KeyPress = "Mod4 Up" { Actions = "SendToWorkspace PrevV KeepFocus; Exec $DESKID; GoToWorkspace PrevV" }
 	KeyPress = "Mod4 Down" { Actions = "SendToWorkspace NextV KeepFocus; Exec $DESKID; GoToWorkspace NextV" }
-
-# Save and restore window position
-	KeyPress = "Mod4 Scroll_Lock" { Actions = "Exec $LOCAL/wingp -s" }
-	KeyPress = "Scroll_Lock" { Actions = "Exec $LOCAL/wingp -r" }
 
 # Window placement
 	KeyPress = "Mod4 Return" { Actions = "Exec wmctrl -r :ACTIVE: -e 0,640,220,2560,1600" }
@@ -51,12 +52,16 @@ Global {
     KeyPress = "Mod4 5" { Actions = "MoveToEdge BottomRight" }
 
 # Window management
-	KeyPress = "F12" { Actions = "Toggle FullScreen" }
 	KeyPress = "Mod4 I" { Actions = "Exec $LOCAL/dowin" }
 	KeyPress = "Mod4 O" { Actions = "Toggle AlwaysOnTop" }
 	KeyPress = "Mod4 Q" { Actions = "Close" }
 	KeyPress = "Mod4 S" { Actions = "Toggle Sticky" }
 	KeyPress = "Mod4 V" { Actions = "Toggle Maximized False True" }
+	KeyPress = "F12" { Actions = "Toggle Maximized True True" }
+
+# Save and restore window position
+	KeyPress = "Mod4 Pause" { Actions = "Exec $LOCAL/wingp -s" }
+	KeyPress = "Pause" { Actions = "Exec $LOCAL/wingp -r" }
 
 # Switch windows
 	KeyPress = "Mod4 Tab" { Actions = "Exec $LOCAL/dowin -ws" }
