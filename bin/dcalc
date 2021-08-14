@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+cf="$HOME/.cache/dcalc_history"
+[ ! -f "$cf" ]; touch "$cf"
+
+hist=$(tac "$cf" | uniq)
+
+while inp=$(echo -en "$res$hist" | dmenu "$1"); do
+	calc=$(bc -ql <<< "$inp")
+	echo "$inp = $calc" >> "$cf"
+	res=" $calc\n$inp\n$res"
+done
