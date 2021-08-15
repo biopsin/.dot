@@ -1,15 +1,25 @@
-#!/usr/bin/sh
-
+#!/usr/bin/bash
+set -x
+# Temp wrkfile
 wgf=/tmp/win.geo
+
 # Windows geometry save/restore
 case $1 in
     -s) # Save all windows
-        wmctrl -lGWS ' ' > $wgf
+        wmctrl -lGWuS ' ' > $wgf
         dunstify -a info "Windows" "\nGeometry saved" -u normal -t 5000
         ;;
 
-    -r) # Restore all windows
-        [ ! -f "$wgf" ] && dunstify "Windows" "\nGeometry not set" -u critical -t 5000 && exit
+    -r) # Restore saved geo on all windows
+        # Create wrkfile if none
+        [ ! -f "$wgf" ] && wmctrl -lGWS ' ' > $wgf && \
+        dunstify -a info "Windows" "\nGeometry saved" -u normal -t 5000 && exit
+
+        # Remove any closed windows
+        upd=$(comm -13 <(wmctrl -l | sort | cut -f 1) <(cut $wgf -d ' ' -f 1 | sort))
+        for val in $upd; do
+            eval sed -i '/$val/d' $wgf
+        done
 
         while read -a arr; do
             wmctrl -ia ${arr[0]} -e ${arr[1]},${arr[2]},${arr[3]},${arr[4]},${arr[5]}
@@ -20,4 +30,3 @@ case $1 in
     '-s' save windows geometry and position\n\
     '-r' restore geometry and position" ;;
 esac
-
