@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-set -x
 # Temp wrkfile
 wgf=/tmp/win.geo
 
