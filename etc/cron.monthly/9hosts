@@ -1,56 +1,31 @@
-#!/bin/sh
+#!/usr/bin/bash
 
-#set -x
-
-## Workdir
-wrkdir=/media/store/Tmp/blocklist
-[ -d "$wrkdir" ] || mkdir  -p "$wrkdir"
-
-## Pull updates
-#curl http://someonewhocares.org/hosts/zero/hosts -o $wrkdir/hosts.in;
-curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -o $wrkdir/hosts.in;
-curl -s https://gitlab.com/ZeroDot1/CoinBlockerLists/raw/master/hosts -o $wrkdir/miners.in;
-#curl -s https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser -o $wrkdir/miners.in;
-
-## Print last modified date
-grep -m1 'Date\|Last modified' $wrkdir/hosts.in $wrkdir/miners.in
+wd=/media/store/Tmp/blocklist
+url=https://raw.githubusercontent.com/Ultimate-Hosts-Blacklist
+for i in {0..2}; do
+	curl -so $wd/domains$i.in $url/Ultimate.Hosts.Blacklist/master/domains/domains$i.list
+done
 
 ## Backup current /etc/hosts
-cp /etc/hosts $wrkdir/hosts.old;
+cp -f /etc/hosts $wd/hosts.old;
 
-## Make work copy
-cp $wrkdir/hosts.in $wrkdir/wrk.cp1;
-
-## Append miners and custom list
-cat $wrkdir/miners.in $wrkdir/custom.in >> $wrkdir/wrk.cp1;
-
-## Remove all comments
-sed '/#/!b;s/#0/0/;s/^/\n/;ta;:a;s/\n$//;t;s/\n\(\("[^"]*"\)\|\('\''[^'\'']*'\''\)\)/\1\n/;ta;s/\n\([^#]\)/\1\n/;ta;s/\n.*//' -i $wrkdir/wrk.cp1;
-
-## Remove remaning spaces
-awk 'NF' $wrkdir/wrk.cp1 > $wrkdir/wrk.cp2;
+## Merge lists to workfile
+cat $wd/domains0.in $wd/domains1.in > $wd/wrk.cp1;
 
 ## clean up any duplicates
-awk '!x[$0]++' $wrkdir/wrk.cp2 > $wrkdir/wrk.cp3;
-
-## Move host names and prepair
-head -n 14 $wrkdir/wrk.cp3 > $wrkdir/hosts.out;
-tail -n +15 $wrkdir/wrk.cp3 > $wrkdir/wrk.cp4;
-
-## Remove leading ip
-sed 's/0.0.0.0 //;s/\s*$//g' -i $wrkdir/wrk.cp4;
+awk '!x[$0]++' $wd/wrk.cp1 > $wd/wrk.cp2;
 
 ## Stack 9 hosts on each line
-awk 'ORS=NR%9?" ":"\n"' $wrkdir/wrk.cp4 > $wrkdir/wrk.cp5;
+awk 'ORS=NR%9?" ":"\n"' $wd/wrk.cp2 > $wd/wrk.cp3;
 
 ## Reinsert ip on each line
-sed 's/^/0.0.0.0 /' -i $wrkdir/wrk.cp5;
+sed -i 's/^/0.0.0.0 /' $wd/wrk.cp3;
 
-## Glue together the parts
-cat $wrkdir/wrk.cp5 >> $wrkdir/hosts.out;
+## Glue all
+cat $wd/localhost.in $wd/wrk.cp3 > $wd/hosts.out;
 
 ## Copy new hosts to /etc
-cp -f $wrkdir/hosts.out /etc/hosts;
+mv $wd/hosts.out /etc/hosts;
 
 ## Cleanup all work copies
-rm $wrkdir/wrk.* ;
+rm $wd/wrk.* ;
