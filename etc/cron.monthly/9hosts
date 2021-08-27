@@ -10,7 +10,7 @@ done
 cp -f /etc/hosts $wd/hosts.old;
 
 ## Merge lists to workfile
-cat $wd/domains0.in $wd/domains1.in > $wd/wrk.cp1;
+cat $wd/domains0.in $wd/domains1.in $wd/domains2.in $wd/custom.in > $wd/wrk.cp1;
 
 ## clean up any duplicates
 awk '!x[$0]++' $wd/wrk.cp1 > $wd/wrk.cp2;
