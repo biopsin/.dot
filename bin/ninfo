@@ -1,9 +1,8 @@
 #!/usr/bin/bash
 
-# Get daily temperture from yr.no
+# Get daily temperture from yr & storm
 yr() {
-    yrl=$(curl -s "https://retro.yr.no/place/Norway/Oslo/Oslo/Hauketo/" | \
-                grep -a "Temperatur" | head -n 2 | cut -d \" -f 4)
+    yrl=$(curl -s "https://pent.no/59.91273,10.74609" | grep -A1 "YR:" | cut -d \" -f1 | head -n2)
     dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo "$yrl")" -t 60000 -u low
 }
 
