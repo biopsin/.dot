@@ -6,19 +6,18 @@ yr() {
     dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo "$yrl")" -t 60000 -u low
 }
 
-# Currency exchange NOK 1.0
+# Currency exchange NOK 100
 cr() {
-    cgt=$(curl -As "https://api.exchangeratesapi.io/latest?base=NOK" | \
-				egrep -o "EUR\":[0-9.]*|USD\":[0-9.]*|GBP\":[0-9.]*|PLN\":[0-9.]*" | \
-				sed 's/":/ /g' | awk -v n=100 '{print $1 " = " $2*n}')
-    dunstify "Rate NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo "$cgt")" -t 60000 -u low
+    cgt=$(curl -s "https://www.dnb.no/portalfront/datafiles/miscellaneous/csv/kursliste_EN.csv" | \
+        grep -w 'USD\|EUR\|SEK\|GBP\|PLN' | awk 'BEGIN { FS = "," } ; { print $3,"    ",$10 }')
+    dunstify "Rate 100NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo "$cgt")" -t 60000 -u low
 }
 
 # Tomorrows plan on underskog.no
 us() {
     usu="https://underskog.no/kalender/liste/$(date --date='tomorrow' +'%Y/%m/%d')"
-    usg=$(curl -s $usu | html2text | awk -F'[][]' '{print $2}' | \
-                awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
+    usg=$(curl -s $usu | html2text | awk 'BEGIN { FS = "[][]" } ; { print $2 }' | \
+         awk 'NF' | awk '/I dag/{found=0} {if(found) print} /Wiki/{found=1}')
     dunstify "Underskog" "<a href=\"https://underskog.no/kalender\"></a>\n$(echo "$usg")" -t 60000 -u low
 }
 
