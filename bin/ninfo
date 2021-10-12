@@ -1,19 +1,19 @@
 #!/usr/bin/bash
 
-# Get daily temperture from yr & storm
+# Daily temperture
 yr() {
     yrl=$(curl -s "https://pent.no/59.91273,10.74609" | grep -A1 "YR:" | cut -d \" -f1 | head -n2)
     dunstify "Weather" "<a href=\"https://www.yr.no/sted/Norge/Oslo/Oslo/Hauketo/\"></a>\n$(echo "$yrl")" -t 60000 -u low
 }
 
-# Currency exchange NOK 100
+# Currency 100NOK
 cr() {
     cgt=$(curl -s "https://www.dnb.no/portalfront/datafiles/miscellaneous/csv/kursliste_EN.csv" | \
         grep -w 'USD\|EUR\|SEK\|GBP\|PLN' | awk 'BEGIN { FS = "," } ; { print $3,"    ",$10 }')
     dunstify "Rate 100NOK" "<a href=\"https://www.exchangerate.com/\"></a>\n$(echo "$cgt")" -t 60000 -u low
 }
 
-# Tomorrows plan on underskog.no
+# Tomorrows plan
 us() {
     usu="https://underskog.no/kalender/liste/$(date --date='tomorrow' +'%Y/%m/%d')"
     usg=$(curl -s $usu | html2text | awk 'BEGIN { FS = "[][]" } ; { print $2 }' | \
