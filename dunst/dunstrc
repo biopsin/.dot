@@ -1,68 +1,65 @@
 [global]
-    monitor = 0
-    follow = none
+	monitor = 0
+	follow = none
 
-    width = (0, 256)
-    height = 300
-    origin = top-right
-    offset = 10x200
-    scale = 0
-    notification_limit = 10
+	width = (167, 256)
+	height = 350
+	origin = top-right
+	offset = 10x150
+	scale = 0
+	notification_limit = 14
 
-    progress_bar = false
-    progress_bar_frame_width = 0
-    progress_bar_min_width = 1
-    progress_bar_max_width = 255
+	progress_bar = false
+	progress_bar_frame_width = 0
+	progress_bar_min_width = 150
+	progress_bar_max_width = 256
 
-    indicate_hidden = no
-    transparency = 10
-    separator_height = 0
-    padding = 10
-    text_icon_padding = 10
-    frame_width = 0
-    frame_color = "#c0c0c0"
-    separator_color = frame
-    sort = yes
-    idle_threshold = 0
+	indicate_hidden = no
+	transparency = 12
+	separator_height = 0
+	padding = 10
+	text_icon_padding = 10
+	frame_width = 0
+	frame_color = "#c0c0c0"
+	gap_size = 1
+	separator_color = frame
+	sort = yes
+	idle_threshold = 0
 
-    font = DejaVu Sans 11
-    line_height = 0
-    markup = full
-    format = "<b>%s</b>\n%b"
-    alignment = left
-    vertical_alignment = center
-    show_age_threshold = -1
-    ellipsize = middle
-    ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = true
-    show_indicators = no
+	font = DejaVu Sans 12
+	line_height = 0
+	markup = full
+	format = "<b>%s</b>\n%b"
+	alignment = left
+	vertical_alignment = center
+	show_age_threshold = -1
+	ellipsize = middle
+	ignore_newline = no
+	stack_duplicates = true
+	hide_duplicate_count = true
+	show_indicators = no
 
-    icon_position = left
-    min_icon_size = 0
-    max_icon_size = 0
+	icon_position = left
+	min_icon_size = 0
+	max_icon_size = 128
     icon_path = /usr/share/icons/Nummy/actions/48/:/usr/share/icons/Nummy/mimes/48/
 
     sticky_history = no
-    history_length = 12
+    history_length = 10
 
     dmenu = /usr/local/bin/dmenu
     browser = /usr/bin/palemoon -new-tab
     always_run_script = false
     title = Dunst
     class = Dunst
-    startup_notification = false
-    verbosity = mesg
     corner_radius = 0
     ignore_dbusclose = false
-    force_xinerama = false
+    force_xwayland = false
+	force_xinerama = false
 
     mouse_left_click = open_url, do_action, close_current
     mouse_middle_click = close_all
     mouse_right_click = close_current
-
-[fullscreen_delay_everything]
-	fullscreen = pushback
 
 [experimental]
     per_monitor_dpi = false
@@ -82,7 +79,18 @@
     foreground = "#ffffff"
     timeout = 0
 
-[download]
+[transient_disable]
+    match_transient = yes
+	set_transient = no
+
+[transient_history_ignore]
+    match_transient = yes
+	history_ignore = yes
+
+[fullscreen_delay_everything]
+	fullscreen = show
+
+[dl]
 	appname = "dl"
 	background = "#ad8ebc"
 	foreground = "#ffffff"
@@ -96,4 +104,14 @@
 [info]
 	appname = "info"
 	background = "#9dbc8e"
+	foreground = "#ffffff"
+
+[info2]
+	appname = "info2"
+	background = "#5cacee"
+	foreground = "#ffffff"
+
+[mpv]
+	appname = "mpv"
+	background = "#2d2d2d"
 	foreground = "#ffffff"
